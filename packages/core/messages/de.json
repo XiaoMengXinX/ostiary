@@ -531,7 +531,8 @@
             "organization_id": "ID der aktiven Organisation",
             "organization_slug": "Slug der aktiven Organisation",
             "organization_role": "Rolle in der aktiven Organisation",
-            "organizations": "Organisationsmitgliedschaften"
+            "organizations": "Organisationsmitgliedschaften",
+            "organization_ids": "IDs der Organisationen des Benutzers"
           }
         },
         "actions": {

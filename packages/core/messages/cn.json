@@ -531,7 +531,8 @@
             "organization_id": "当前组织 ID",
             "organization_slug": "当前组织标识（slug）",
             "organization_role": "在当前组织中的角色",
-            "organizations": "所属组织"
+            "organizations": "所属组织",
+            "organization_ids": "所属组织的 ID"
           }
         },
         "actions": {

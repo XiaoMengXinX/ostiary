@@ -531,7 +531,8 @@
             "organization_id": "ID aktivní organizace",
             "organization_slug": "Slug aktivní organizace",
             "organization_role": "Role v aktivní organizaci",
-            "organizations": "Členství v organizacích"
+            "organizations": "Členství v organizacích",
+            "organization_ids": "ID organizací, jejichž je uživatel členem"
           }
         },
         "actions": {

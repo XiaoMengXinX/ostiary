@@ -531,7 +531,8 @@
             "organization_id": "ID van de actieve organisatie",
             "organization_slug": "Slug van de actieve organisatie",
             "organization_role": "Rol in de actieve organisatie",
-            "organizations": "Lidmaatschappen van organisaties"
+            "organizations": "Lidmaatschappen van organisaties",
+            "organization_ids": "ID’s van organisaties waarvan de gebruiker lid is"
           }
         },
         "actions": {

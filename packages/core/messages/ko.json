@@ -531,7 +531,8 @@
             "organization_id": "활성 조직 ID",
             "organization_slug": "활성 조직 슬러그",
             "organization_role": "활성 조직에서의 역할",
-            "organizations": "조직 멤버십"
+            "organizations": "조직 멤버십",
+            "organization_ids": "소속 조직 ID"
           }
         },
         "actions": {

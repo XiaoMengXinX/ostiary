@@ -531,7 +531,8 @@
             "organization_id": "アクティブな組織の ID",
             "organization_slug": "アクティブな組織のスラッグ",
             "organization_role": "アクティブな組織でのロール",
-            "organizations": "組織のメンバーシップ"
+            "organizations": "組織のメンバーシップ",
+            "organization_ids": "所属組織の ID"
           }
         },
         "actions": {

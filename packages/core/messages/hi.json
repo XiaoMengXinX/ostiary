@@ -531,7 +531,8 @@
             "organization_id": "सक्रिय संगठन की ID",
             "organization_slug": "सक्रिय संगठन का स्लग",
             "organization_role": "सक्रिय संगठन में भूमिका",
-            "organizations": "संगठन सदस्यताएँ"
+            "organizations": "संगठन सदस्यताएँ",
+            "organization_ids": "सदस्यता वाले संगठनों के आईडी"
           }
         },
         "actions": {

@@ -123,6 +123,7 @@ describe("buildClientClaims", () => {
     { name: "org_slug", tokens: ["access_token"], source: "attribute", attribute: "organization.slug" },
     { name: "org_role", tokens: ["access_token"], source: "attribute", attribute: "organization.role" },
     { name: "orgs", tokens: ["id_token"], source: "attribute", attribute: "organizations" },
+    { name: "org_ids", tokens: ["id_token"], source: "attribute", attribute: "organization_ids" },
   ];
 
   it("puts each claim only in its tokens, with values from the user and session", () => {
@@ -141,6 +142,7 @@ describe("buildClientClaims", () => {
         { id: "org_8Kq2", slug: "acme", role: "admin" },
         { id: "org_3Tz9", slug: "globex", role: "member" },
       ],
+      org_ids: ["org_8Kq2", "org_3Tz9"],
     });
     expect(buildClientClaims(claims, "userinfo", EXAMPLE_CLAIM_CONTEXT)).toEqual({ tenant: "acme", handle: "ada" });
   });
@@ -156,13 +158,14 @@ describe("buildClientClaims", () => {
       organizations: [],
     };
     expect(buildClientClaims(claims, "access_token", context)).toEqual({ tenant: "acme", mfa: false });
-    expect(buildClientClaims(claims, "id_token", context)).toEqual({ tenant: "acme", verified: false, orgs: [] });
+    expect(buildClientClaims(claims, "id_token", context)).toEqual({ tenant: "acme", verified: false, orgs: [], org_ids: [] });
   });
 
   it("caps the organization list", () => {
     const organizations = Array.from({ length: 60 }, (_, i) => ({ id: `org_${i}`, slug: `o${i}`, role: "member" }));
     const built = buildClientClaims(claims, "id_token", { ...EXAMPLE_CLAIM_CONTEXT, organizations });
     expect(built.orgs).toHaveLength(50);
+    expect(built.org_ids).toEqual(organizations.slice(0, 50).map(({ id }) => id));
   });
 
   it("skips reserved names even when stored", () => {
@@ -174,6 +177,7 @@ describe("buildClientClaims", () => {
     expect(claimNeeds(claims, "userinfo")).toEqual({ user: true, organization: false, organizations: false });
     expect(claimNeeds(claims, "access_token")).toEqual({ user: true, organization: true, organizations: false });
     expect(claimNeeds(claims, "id_token")).toEqual({ user: true, organization: false, organizations: true });
+    expect(claimNeeds(claims.filter((claim) => claim.name === "org_ids"), "id_token")).toEqual({ user: true, organization: false, organizations: true });
     expect(claimNeeds([claims[0]!], "access_token")).toEqual({ user: false, organization: false, organizations: false });
   });
 });

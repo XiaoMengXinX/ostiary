@@ -531,7 +531,8 @@
             "organization_id": "ID for aktiv organisasjon",
             "organization_slug": "Slug for aktiv organisasjon",
             "organization_role": "Rolle i aktiv organisasjon",
-            "organizations": "Medlemskap i organisasjoner"
+            "organizations": "Medlemskap i organisasjoner",
+            "organization_ids": "ID-er for organisasjoner brukeren er medlem av"
           }
         },
         "actions": {

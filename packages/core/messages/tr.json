@@ -531,7 +531,8 @@
             "organization_id": "Etkin kuruluşun kimliği",
             "organization_slug": "Etkin kuruluşun slug'ı",
             "organization_role": "Etkin kuruluştaki rol",
-            "organizations": "Kuruluş üyelikleri"
+            "organizations": "Kuruluş üyelikleri",
+            "organization_ids": "Kullanıcının üye olduğu kuruluşların kimlikleri"
           }
         },
         "actions": {

@@ -531,7 +531,8 @@
             "organization_id": "ID активной организации",
             "organization_slug": "Slug активной организации",
             "organization_role": "Роль в активной организации",
-            "organizations": "Членство в организациях"
+            "organizations": "Членство в организациях",
+            "organization_ids": "Идентификаторы организаций, в которых состоит пользователь"
           }
         },
         "actions": {

@@ -531,7 +531,8 @@
             "organization_id": "معرّف المؤسسة النشطة",
             "organization_slug": "المعرّف النصي (slug) للمؤسسة النشطة",
             "organization_role": "الدور في المؤسسة النشطة",
-            "organizations": "عضويات المؤسسات"
+            "organizations": "عضويات المؤسسات",
+            "organization_ids": "معرّفات المؤسسات التي ينتمي إليها المستخدم"
           }
         },
         "actions": {

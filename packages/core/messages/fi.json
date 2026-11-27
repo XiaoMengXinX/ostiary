@@ -531,7 +531,8 @@
             "organization_id": "Aktiivisen organisaation tunnus",
             "organization_slug": "Aktiivisen organisaation slug",
             "organization_role": "Rooli aktiivisessa organisaatiossa",
-            "organizations": "Organisaatiojäsenyydet"
+            "organizations": "Organisaatiojäsenyydet",
+            "organization_ids": "Käyttäjän organisaatioiden tunnukset"
           }
         },
         "actions": {

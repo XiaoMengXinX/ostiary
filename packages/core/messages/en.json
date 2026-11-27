@@ -531,7 +531,8 @@
             "organization_id": "Active organization ID",
             "organization_slug": "Active organization slug",
             "organization_role": "Role in the active organization",
-            "organizations": "Organization memberships"
+            "organizations": "Organization memberships",
+            "organization_ids": "Organization membership IDs"
           }
         },
         "actions": {

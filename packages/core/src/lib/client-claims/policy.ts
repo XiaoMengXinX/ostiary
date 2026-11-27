@@ -31,6 +31,7 @@ export const CLAIM_ATTRIBUTES = [
   "organization.slug",
   "organization.role",
   "organizations",
+  "organization_ids",
 ] as const;
 export type ClaimAttribute = (typeof CLAIM_ATTRIBUTES)[number];
 
@@ -261,6 +262,8 @@ export function attributeValue(attribute: ClaimAttribute, context: ClaimContext)
       return context.organizations
         ?.slice(0, CLIENT_CLAIMS_LIMITS.maxOrganizations)
         .map(({ id, slug, role }) => ({ id, slug, role }));
+    case "organization_ids":
+      return context.organizations?.slice(0, CLIENT_CLAIMS_LIMITS.maxOrganizations).map(({ id }) => id);
   }
 }
 
@@ -272,7 +275,7 @@ export function claimNeeds(claims: readonly ClientClaim[], token: ClaimToken) {
   return {
     user: attributes.size > 0,
     organization: [...attributes].some((attribute) => attribute.startsWith("organization.")),
-    organizations: attributes.has("organizations"),
+    organizations: attributes.has("organizations") || attributes.has("organization_ids"),
   };
 }
 

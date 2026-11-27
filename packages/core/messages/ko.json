@@ -42,7 +42,8 @@
         "invalidEmail": "올바른 이메일 주소를 입력하세요.",
         "error": "이메일을 보낼 수 없습니다. 잠시 후 다시 시도하세요."
       },
-      "addAccountDescription": "이 브라우저에 이미 로그인된 계정은 로그인 상태로 유지됩니다."
+      "addAccountDescription": "이 브라우저에 이미 로그인된 계정은 로그인 상태로 유지됩니다.",
+      "phoneCode": "문자로 로그인 코드 받기"
     },
     "emailCode": {
       "title": "코드로 로그인",
@@ -200,6 +201,30 @@
       "setUp": "2단계 인증 설정",
       "later": "나중에 알림",
       "continue": "계속"
+    },
+    "phoneCode": {
+      "title": "문자로 로그인",
+      "description": "계정의 전화번호로 6자리 코드를 문자로 보내 드립니다.",
+      "phoneLabel": "전화번호",
+      "phoneHint": "국제 형식(+와 국가 번호로 시작).",
+      "send": "코드 보내기",
+      "sending": "보내는 중…",
+      "sentTitle": "휴대폰을 확인하세요",
+      "sent": "{phone}을(를) 사용하는 계정이 있으면 6자리 코드가 전송되었습니다. {minutes}분 후에 만료됩니다.",
+      "codeLabel": "로그인 코드",
+      "verify": "로그인",
+      "verifying": "로그인 중…",
+      "newCode": "받지 못했나요? 새 코드 보내기",
+      "usePassword": "비밀번호로 로그인",
+      "errors": {
+        "invalidPhone": "+821012345678처럼 국제 형식으로 입력하세요.",
+        "invalidCode": "코드가 올바르지 않습니다. 확인 후 다시 시도하세요.",
+        "expired": "코드가 만료되었습니다. 새 코드를 요청하세요.",
+        "tooManyAttempts": "잘못된 코드가 너무 많습니다. 새 코드를 요청하세요.",
+        "rateLimited": "시도가 너무 많습니다. 몇 분 후 다시 시도하세요.",
+        "sendFailed": "코드를 보내지 못했습니다. 몇 분 후 다시 시도하세요.",
+        "signInFailed": "로그인하지 못했습니다. 다시 시도하세요."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "활성 조직 ID",
             "organization_slug": "활성 조직 슬러그",
             "organization_role": "활성 조직에서의 역할",
+            "organization_permissions": "활성 조직에서의 권한",
+            "organization_teams": "활성 조직에서의 팀",
             "organizations": "조직 멤버십",
             "organization_ids": "소속 조직 ID"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "계정 데이터 내보내기",
             "self_delete": "본인 계정 삭제",
             "export_csv": "사용자를 CSV로 내보내기",
-            "import": "사용자 가져오기"
+            "import": "사용자 가져오기",
+            "remove_phone_number": "전화번호 삭제"
           },
           "oauth_client": {
             "create": "OAuth 클라이언트 등록",
@@ -1953,7 +1981,15 @@
             "invite": "멤버 초대",
             "cancel_invitation": "초대 취소",
             "update_member_role": "멤버 역할 변경",
-            "remove_member": "멤버 제거"
+            "remove_member": "멤버 제거",
+            "create_role": "조직 역할 생성",
+            "update_role": "조직 역할 변경",
+            "delete_role": "조직 역할 삭제",
+            "create_team": "팀 생성",
+            "update_team": "팀 이름 변경",
+            "delete_team": "팀 삭제",
+            "add_team_member": "팀에 구성원 추가",
+            "remove_team_member": "팀에서 구성원 제외"
           },
           "sso_provider": {
             "create": "SSO 제공자 등록",
@@ -2240,6 +2276,61 @@
           "lastOwner": "조직에는 소유자가 한 명 이상 있어야 합니다. 먼저 다른 구성원을 소유자로 지정하세요.",
           "publicDelete": "Public 워크스페이스는 삭제할 수 없습니다.",
           "organizationNotFound": "조직을 찾을 수 없습니다."
+        },
+        "rolesTeams": {
+          "rolesTitle": "사용자 지정 역할",
+          "teamsTitle": "팀",
+          "rolesDescription": "소유자, 관리자, 구성원 외에 이 조직만의 역할이며 각각 고유한 권한이 있습니다. 기본 역할처럼 구성원에게 부여할 수 있고, 토큰에는 역할 이름(organization.role)과 권한(organization.permissions)이 담깁니다.",
+          "noRoles": "사용자 지정 역할이 없습니다.",
+          "memberCount": "구성원 {count}명",
+          "noPermissions": "권한 없음",
+          "edit": "편집",
+          "delete": "삭제",
+          "editRole": "{role} 편집",
+          "deleteRole": "{role} 삭제",
+          "addRole": "역할 추가",
+          "deleteRoleTitle": "{role}을(를) 삭제할까요?",
+          "deleteRoleDescription": "이 조직에서 역할이 사라집니다. 이 역할을 가진 구성원이 없어야 삭제할 수 있습니다.",
+          "cancel": "취소",
+          "roleDeleted": "역할을 삭제했습니다.",
+          "roleSaved": "역할을 저장했습니다.",
+          "roleDialogDescription": "이 역할이 조직에서 할 수 있는 일을 선택하세요. 조직의 소유자와 관리자도 역할을 직접 관리할 수 있습니다.",
+          "roleName": "역할 이름",
+          "roleNameHint": "영문 소문자, 숫자, 하이픈, 밑줄 2~32자이며 영문자로 시작합니다. 나중에 바꿀 수 없습니다.",
+          "permissions": "권한",
+          "save": "저장",
+          "teamsDescription": "조직 안의 구성원 그룹입니다. 토큰에는 구성원의 팀(organization.teams)이 담깁니다.",
+          "noTeams": "팀이 없습니다.",
+          "teamCreated": "팀을 만들었습니다.",
+          "newTeam": "새 팀",
+          "createTeam": "팀 만들기",
+          "teamRenamed": "팀 이름을 바꿨습니다.",
+          "teamName": "팀 이름",
+          "renameTeam": "{team} 이름 바꾸기",
+          "rename": "이름 바꾸기",
+          "deleteTeam": "{team} 삭제",
+          "noTeamMembers": "이 팀에 구성원이 없습니다.",
+          "removeFromTeam": "{team}에서 {email} 제외",
+          "remove": "제외",
+          "teamMemberRemoved": "팀에서 구성원을 제외했습니다.",
+          "teamMemberAdded": "팀에 구성원을 추가했습니다.",
+          "addToTeam": "{team}에 구성원 추가",
+          "memberEmail": "구성원 이메일",
+          "add": "추가",
+          "deleteTeamTitle": "{team}을(를) 삭제할까요?",
+          "deleteTeamDescription": "팀과 구성원 목록이 삭제됩니다. 구성원은 조직에 남습니다.",
+          "teamDeleted": "팀을 삭제했습니다.",
+          "errors": {
+            "invalidName": "역할 이름은 영문 소문자, 숫자, 하이픈, 밑줄 2~32자이며 영문자로 시작합니다.",
+            "reservedName": "owner, admin, member는 기본 역할입니다.",
+            "nameTaken": "이 조직에 같은 이름의 역할이 이미 있습니다.",
+            "invalidPermissions": "알 수 없는 권한이 있습니다.",
+            "roleInUse": "이 역할을 가진 구성원이 있습니다. 먼저 다른 역할을 부여하세요.",
+            "notFound": "이 조직에서 찾을 수 없습니다.",
+            "notMember": "이 사람은 조직의 구성원이 아닙니다.",
+            "alreadyInTeam": "이 구성원은 이미 팀에 있습니다.",
+            "invalidTeamName": "팀 이름은 1~64자입니다."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "<strong>{email}</strong>(으)로 이 계정을 보고 있습니다.",
       "stop": "대리 로그인 중지"
+    },
+    "phone": {
+      "title": "전화번호",
+      "description": "이 번호로 문자로 받은 코드로 로그인합니다.",
+      "none": "전화번호 없음",
+      "add": "번호 추가",
+      "change": "변경",
+      "remove": "삭제",
+      "phoneLabel": "전화번호",
+      "phoneHint": "국제 형식(+와 국가 번호로 시작). 확인을 위해 문자로 코드를 보냅니다.",
+      "send": "코드 보내기",
+      "cancel": "취소",
+      "codeLabel": "{phone}(으)로 보낸 코드",
+      "verify": "번호 저장",
+      "invalidPhone": "+821012345678처럼 국제 형식으로 입력하세요.",
+      "sendFailed": "코드를 보내지 못했습니다. 몇 분 후 다시 시도하세요.",
+      "verifyFailed": "코드가 올바르지 않거나 만료되었습니다.",
+      "taken": "다른 계정이 이미 이 번호를 사용합니다.",
+      "saved": "번호를 저장했습니다.",
+      "removeFailed": "번호를 삭제하지 못했습니다.",
+      "removed": "번호를 삭제했습니다."
     }
   },
   "acceptInvitation": {

@@ -42,7 +42,8 @@
         "invalidEmail": "Enter a valid email address.",
         "error": "Could not send the email. Try again in a minute."
       },
-      "addAccountDescription": "Accounts already signed in on this browser stay signed in."
+      "addAccountDescription": "Accounts already signed in on this browser stay signed in.",
+      "phoneCode": "Text me a sign-in code"
     },
     "emailCode": {
       "title": "Sign in with a code",
@@ -200,6 +201,30 @@
       "setUp": "Set up two-factor authentication",
       "later": "Remind me later",
       "continue": "Continue"
+    },
+    "phoneCode": {
+      "title": "Sign in with a text message",
+      "description": "We'll text a 6-digit code to the phone number on your account.",
+      "phoneLabel": "Phone number",
+      "phoneHint": "International format, starting with + and the country code.",
+      "send": "Send code",
+      "sending": "Sending…",
+      "sentTitle": "Check your phone",
+      "sent": "If an account uses {phone}, a 6-digit code is on its way. It expires in {minutes} minutes.",
+      "codeLabel": "Sign-in code",
+      "verify": "Sign in",
+      "verifying": "Signing in…",
+      "newCode": "Didn't get it? Send a new code",
+      "usePassword": "Use your password instead",
+      "errors": {
+        "invalidPhone": "Enter the number in international format, such as +33612345678.",
+        "invalidCode": "That code isn't right. Check it and try again.",
+        "expired": "This code has expired. Ask for a new one.",
+        "tooManyAttempts": "Too many wrong codes. Ask for a new one.",
+        "rateLimited": "Too many attempts. Wait a few minutes and try again.",
+        "sendFailed": "Could not send the code. Try again in a few minutes.",
+        "signInFailed": "Could not sign in. Try again."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "Active organization ID",
             "organization_slug": "Active organization slug",
             "organization_role": "Role in the active organization",
+            "organization_permissions": "Permissions in the active organization",
+            "organization_teams": "Teams in the active organization",
             "organizations": "Organization memberships",
             "organization_ids": "Organization membership IDs"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Exported account data",
             "self_delete": "Deleted their own account",
             "export_csv": "Exported users to CSV",
-            "import": "Imported users"
+            "import": "Imported users",
+            "remove_phone_number": "Removed their phone number"
           },
           "oauth_client": {
             "create": "Registered OAuth client",
@@ -1953,7 +1981,15 @@
             "invite": "Invited member",
             "cancel_invitation": "Cancelled invitation",
             "update_member_role": "Changed member role",
-            "remove_member": "Removed member"
+            "remove_member": "Removed member",
+            "create_role": "Created an organization role",
+            "update_role": "Changed an organization role",
+            "delete_role": "Deleted an organization role",
+            "create_team": "Created a team",
+            "update_team": "Renamed a team",
+            "delete_team": "Deleted a team",
+            "add_team_member": "Added a member to a team",
+            "remove_team_member": "Removed a member from a team"
           },
           "sso_provider": {
             "create": "Registered SSO provider",
@@ -2240,6 +2276,61 @@
           "lastOwner": "An organization needs at least one owner. Make another member an owner first.",
           "publicDelete": "The Public workspace cannot be deleted.",
           "organizationNotFound": "Organization not found."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Custom roles",
+          "teamsTitle": "Teams",
+          "rolesDescription": "Roles of this organization on top of owner, admin and member, each with its own permissions. Members can be given them like the built-in ones, and tokens carry the role's name (organization.role) and permissions (organization.permissions).",
+          "noRoles": "No custom role.",
+          "memberCount": "{count, plural, one {# member} other {# members}}",
+          "noPermissions": "No permissions",
+          "edit": "Edit",
+          "delete": "Delete",
+          "editRole": "Edit {role}",
+          "deleteRole": "Delete {role}",
+          "addRole": "Add role",
+          "deleteRoleTitle": "Delete {role}?",
+          "deleteRoleDescription": "The role disappears from this organization. It can only be deleted once no member holds it.",
+          "cancel": "Cancel",
+          "roleDeleted": "Role deleted.",
+          "roleSaved": "Role saved.",
+          "roleDialogDescription": "Tick what the role may do in the organization. Owners and admins of the organization can also manage roles themselves.",
+          "roleName": "Role name",
+          "roleNameHint": "2 to 32 lowercase letters, digits, hyphens or underscores, starting with a letter. Cannot be changed later.",
+          "permissions": "Permissions",
+          "save": "Save",
+          "teamsDescription": "Groups of members inside the organization. Tokens carry the member's teams (organization.teams).",
+          "noTeams": "No team.",
+          "teamCreated": "Team created.",
+          "newTeam": "New team",
+          "createTeam": "Create team",
+          "teamRenamed": "Team renamed.",
+          "teamName": "Team name",
+          "renameTeam": "Rename {team}",
+          "rename": "Rename",
+          "deleteTeam": "Delete {team}",
+          "noTeamMembers": "No member in this team.",
+          "removeFromTeam": "Remove {email} from {team}",
+          "remove": "Remove",
+          "teamMemberRemoved": "Member removed from the team.",
+          "teamMemberAdded": "Member added to the team.",
+          "addToTeam": "Add a member to {team}",
+          "memberEmail": "Member's email",
+          "add": "Add",
+          "deleteTeamTitle": "Delete {team}?",
+          "deleteTeamDescription": "The team and its member list are deleted. The members stay in the organization.",
+          "teamDeleted": "Team deleted.",
+          "errors": {
+            "invalidName": "A role name has 2 to 32 lowercase letters, digits, hyphens or underscores, starting with a letter.",
+            "reservedName": "owner, admin and member are built-in roles.",
+            "nameTaken": "This organization already has a role with this name.",
+            "invalidPermissions": "One of the permissions is not known.",
+            "roleInUse": "Members hold this role: give them another role first.",
+            "notFound": "Not found in this organization.",
+            "notMember": "This person is not a member of the organization.",
+            "alreadyInTeam": "This member is already in the team.",
+            "invalidTeamName": "A team name has 1 to 64 characters."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "You are viewing this account as <strong>{email}</strong>.",
       "stop": "Stop impersonating"
+    },
+    "phone": {
+      "title": "Phone number",
+      "description": "Sign in with a code texted to this number.",
+      "none": "No phone number",
+      "add": "Add a phone number",
+      "change": "Change",
+      "remove": "Remove",
+      "phoneLabel": "Phone number",
+      "phoneHint": "International format, starting with + and the country code. We'll text a code to check it.",
+      "send": "Send code",
+      "cancel": "Cancel",
+      "codeLabel": "Code texted to {phone}",
+      "verify": "Save number",
+      "invalidPhone": "Enter the number in international format, such as +33612345678.",
+      "sendFailed": "Could not send the code. Try again in a few minutes.",
+      "verifyFailed": "That code isn't right, or it has expired.",
+      "taken": "Another account already uses this number.",
+      "saved": "Phone number saved.",
+      "removeFailed": "Could not remove the phone number.",
+      "removed": "Phone number removed."
     }
   },
   "acceptInvitation": {

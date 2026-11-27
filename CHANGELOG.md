@@ -8,6 +8,24 @@ All notable changes are documented here. The format follows
 
 ### Added
 
+- Sign-in with a code sent by text message (Better Auth's `phone-number` plugin), through
+  Twilio: set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` and `TWILIO_FROM`. People add and
+  verify a phone number on their account page (a recent sign-in, like adding a passkey), then
+  "Text me a sign-in code" on the sign-in page sends a 6-digit code. Codes go only to numbers an
+  account verified, behind the captcha and a rate limit (3 texts per 10 minutes per IP), so the
+  endpoint cannot be used to text anyone. Accounts with two-factor authentication still get their
+  second step. No sign-up by phone, no password sign-in or reset by phone, and a profile update
+  cannot set a number. New columns `user.phone_number` and `user.phone_number_verified`
+  (migration 0018).
+- Organization custom roles and teams (Better Auth's `dynamicAccessControl` and `teams`). An
+  organization's page in the admin console adds roles with their own permissions (any of the
+  built-in roles' resources and actions, API keys included), offers them in the member role
+  and invitation lists, and manages teams and their members. Better Auth enforces a custom
+  role's permissions; owners and admins of an organization can also manage roles and teams
+  through Better Auth's endpoints. Token claims gain `organization.permissions` (the role's
+  permissions) and `organization.teams` (the member's teams in the active organization).
+  New tables `organization_role`, `team` and `team_member`, and `session.active_team_id` and
+  `invitation.team_id` (migration 0017).
 - Two-factor authentication required for everyone, or for an organization's members: **Security**
   › Sessions and passwords has "Two-factor authentication for everyone" and a grace period (none,
   7, 14 or 30 days), and each organization's page has "Require two-factor authentication for
@@ -100,6 +118,9 @@ All notable changes are documented here. The format follows
 
 ### Fixed
 
+- A passkey sign-in on the login page an app sent the person to opened their dashboard instead of
+  going on to the app (consent, then back to the app). It resumes the app's sign-in now, as a
+  password sign-in does (#110).
 - The admin console's **Applications** page listed at most 100 apps: Better Auth's
   `/oauth2/get-clients` stops there (its adapter's default limit). It now reads every
   admin-registered app from `GET /api/admin/oauth-clients`.

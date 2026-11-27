@@ -42,7 +42,8 @@
         "invalidEmail": "Ange en giltig e-postadress.",
         "error": "Det gick inte att skicka mejlet. Försök igen om en minut."
       },
-      "addAccountDescription": "Konton som redan är inloggade i den här webbläsaren förblir inloggade."
+      "addAccountDescription": "Konton som redan är inloggade i den här webbläsaren förblir inloggade.",
+      "phoneCode": "Sms:a mig en inloggningskod"
     },
     "emailCode": {
       "title": "Logga in med en kod",
@@ -200,6 +201,30 @@
       "setUp": "Konfigurera tvåfaktorsautentisering",
       "later": "Påminn mig senare",
       "continue": "Fortsätt"
+    },
+    "phoneCode": {
+      "title": "Logga in med sms",
+      "description": "Vi sms:ar en 6-siffrig kod till telefonnumret på ditt konto.",
+      "phoneLabel": "Telefonnummer",
+      "phoneHint": "Internationellt format, med + och landsnummer.",
+      "send": "Skicka kod",
+      "sending": "Skickar…",
+      "sentTitle": "Titta i telefonen",
+      "sent": "Om ett konto använder {phone} är en 6-siffrig kod på väg. Den gäller i {minutes} minuter.",
+      "codeLabel": "Inloggningskod",
+      "verify": "Logga in",
+      "verifying": "Loggar in…",
+      "newCode": "Fick du ingen? Skicka en ny kod",
+      "usePassword": "Använd ditt lösenord i stället",
+      "errors": {
+        "invalidPhone": "Ange numret i internationellt format, till exempel +46701234567.",
+        "invalidCode": "Koden stämmer inte. Kontrollera den och försök igen.",
+        "expired": "Koden har gått ut. Be om en ny.",
+        "tooManyAttempts": "För många felaktiga koder. Be om en ny.",
+        "rateLimited": "För många försök. Vänta några minuter och försök igen.",
+        "sendFailed": "Det gick inte att skicka koden. Försök igen om några minuter.",
+        "signInFailed": "Det gick inte att logga in. Försök igen."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "ID för aktiv organisation",
             "organization_slug": "Slug för aktiv organisation",
             "organization_role": "Roll i aktiv organisation",
+            "organization_permissions": "Behörigheter i den aktiva organisationen",
+            "organization_teams": "Team i den aktiva organisationen",
             "organizations": "Medlemskap i organisationer",
             "organization_ids": "ID:n för organisationer som användaren tillhör"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Exporterade kontodata",
             "self_delete": "Raderade sitt eget konto",
             "export_csv": "Exporterade användare till CSV",
-            "import": "Importerade användare"
+            "import": "Importerade användare",
+            "remove_phone_number": "Tog bort sitt telefonnummer"
           },
           "oauth_client": {
             "create": "Registrerade OAuth-klient",
@@ -1953,7 +1981,15 @@
             "invite": "Bjöd in medlem",
             "cancel_invitation": "Avbröt inbjudan",
             "update_member_role": "Ändrade medlemsroll",
-            "remove_member": "Tog bort medlem"
+            "remove_member": "Tog bort medlem",
+            "create_role": "Skapade en organisationsroll",
+            "update_role": "Ändrade en organisationsroll",
+            "delete_role": "Tog bort en organisationsroll",
+            "create_team": "Skapade ett team",
+            "update_team": "Bytte namn på ett team",
+            "delete_team": "Tog bort ett team",
+            "add_team_member": "Lade till en medlem i ett team",
+            "remove_team_member": "Tog bort en medlem från ett team"
           },
           "sso_provider": {
             "create": "Registrerade SSO-leverantör",
@@ -2240,6 +2276,61 @@
           "lastOwner": "En organisation behöver minst en ägare. Gör först en annan medlem till ägare.",
           "publicDelete": "Arbetsytan Public kan inte tas bort.",
           "organizationNotFound": "Organisationen hittades inte."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Egna roller",
+          "teamsTitle": "Team",
+          "rolesDescription": "Roller för den här organisationen utöver ägare, admin och medlem, var och en med egna behörigheter. De tilldelas medlemmar som de inbyggda, och token innehåller rollens namn (organization.role) och behörigheter (organization.permissions).",
+          "noRoles": "Ingen egen roll.",
+          "memberCount": "{count, plural, one {# medlem} other {# medlemmar}}",
+          "noPermissions": "Inga behörigheter",
+          "edit": "Redigera",
+          "delete": "Ta bort",
+          "editRole": "Redigera {role}",
+          "deleteRole": "Ta bort {role}",
+          "addRole": "Lägg till roll",
+          "deleteRoleTitle": "Ta bort {role}?",
+          "deleteRoleDescription": "Rollen försvinner från organisationen. Den kan bara tas bort när ingen medlem har den.",
+          "cancel": "Avbryt",
+          "roleDeleted": "Rollen togs bort.",
+          "roleSaved": "Rollen sparades.",
+          "roleDialogDescription": "Markera vad rollen får göra i organisationen. Organisationens ägare och administratörer kan också hantera roller själva.",
+          "roleName": "Rollnamn",
+          "roleNameHint": "2 till 32 små bokstäver, siffror, bindestreck eller understreck, och börjar med en bokstav. Kan inte ändras senare.",
+          "permissions": "Behörigheter",
+          "save": "Spara",
+          "teamsDescription": "Grupper av medlemmar inom organisationen. Token innehåller medlemmens team (organization.teams).",
+          "noTeams": "Inget team.",
+          "teamCreated": "Teamet skapades.",
+          "newTeam": "Nytt team",
+          "createTeam": "Skapa team",
+          "teamRenamed": "Teamet bytte namn.",
+          "teamName": "Teamnamn",
+          "renameTeam": "Byt namn på {team}",
+          "rename": "Byt namn",
+          "deleteTeam": "Ta bort {team}",
+          "noTeamMembers": "Inga medlemmar i teamet.",
+          "removeFromTeam": "Ta bort {email} från {team}",
+          "remove": "Ta bort",
+          "teamMemberRemoved": "Medlemmen togs bort från teamet.",
+          "teamMemberAdded": "Medlemmen lades till i teamet.",
+          "addToTeam": "Lägg till en medlem i {team}",
+          "memberEmail": "Medlemmens e-post",
+          "add": "Lägg till",
+          "deleteTeamTitle": "Ta bort {team}?",
+          "deleteTeamDescription": "Teamet och dess medlemslista tas bort. Medlemmarna finns kvar i organisationen.",
+          "teamDeleted": "Teamet togs bort.",
+          "errors": {
+            "invalidName": "Ett rollnamn har 2 till 32 små bokstäver, siffror, bindestreck eller understreck och börjar med en bokstav.",
+            "reservedName": "owner, admin och member är inbyggda roller.",
+            "nameTaken": "Organisationen har redan en roll med det namnet.",
+            "invalidPermissions": "En av behörigheterna är okänd.",
+            "roleInUse": "Medlemmar har den här rollen: ge dem en annan roll först.",
+            "notFound": "Hittades inte i organisationen.",
+            "notMember": "Personen är inte medlem i organisationen.",
+            "alreadyInTeam": "Medlemmen är redan i teamet.",
+            "invalidTeamName": "Ett teamnamn har 1 till 64 tecken."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "Du visar det här kontot som <strong>{email}</strong>.",
       "stop": "Sluta agera som användaren"
+    },
+    "phone": {
+      "title": "Telefonnummer",
+      "description": "Logga in med en kod som sms:as till det här numret.",
+      "none": "Inget telefonnummer",
+      "add": "Lägg till ett nummer",
+      "change": "Ändra",
+      "remove": "Ta bort",
+      "phoneLabel": "Telefonnummer",
+      "phoneHint": "Internationellt format, med + och landsnummer. Vi sms:ar en kod för att kontrollera det.",
+      "send": "Skicka kod",
+      "cancel": "Avbryt",
+      "codeLabel": "Kod skickad till {phone}",
+      "verify": "Spara nummer",
+      "invalidPhone": "Ange numret i internationellt format, till exempel +46701234567.",
+      "sendFailed": "Det gick inte att skicka koden. Försök igen om några minuter.",
+      "verifyFailed": "Koden stämmer inte eller har gått ut.",
+      "taken": "Ett annat konto använder redan det här numret.",
+      "saved": "Numret sparades.",
+      "removeFailed": "Det gick inte att ta bort numret.",
+      "removed": "Numret togs bort."
     }
   },
   "acceptInvitation": {

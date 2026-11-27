@@ -42,7 +42,8 @@
         "invalidEmail": "Voer een geldig e-mailadres in.",
         "error": "De e-mail kon niet worden verstuurd. Probeer het over een minuut opnieuw."
       },
-      "addAccountDescription": "Accounts die al zijn aangemeld in deze browser blijven aangemeld."
+      "addAccountDescription": "Accounts die al zijn aangemeld in deze browser blijven aangemeld.",
+      "phoneCode": "Sms me een inlogcode"
     },
     "emailCode": {
       "title": "Inloggen met een code",
@@ -200,6 +201,30 @@
       "setUp": "Tweestapsverificatie instellen",
       "later": "Herinner me later",
       "continue": "Doorgaan"
+    },
+    "phoneCode": {
+      "title": "Inloggen via sms",
+      "description": "We sturen een 6-cijferige code per sms naar het telefoonnummer van je account.",
+      "phoneLabel": "Telefoonnummer",
+      "phoneHint": "Internationaal formaat, met + en de landcode.",
+      "send": "Code versturen",
+      "sending": "Versturen…",
+      "sentTitle": "Kijk op je telefoon",
+      "sent": "Als een account {phone} gebruikt, is er een 6-cijferige code onderweg. Hij verloopt over {minutes} minuten.",
+      "codeLabel": "Inlogcode",
+      "verify": "Inloggen",
+      "verifying": "Inloggen…",
+      "newCode": "Niets ontvangen? Stuur een nieuwe code",
+      "usePassword": "Je wachtwoord gebruiken",
+      "errors": {
+        "invalidPhone": "Vul het nummer in internationaal formaat in, zoals +31612345678.",
+        "invalidCode": "Die code klopt niet. Controleer hem en probeer het opnieuw.",
+        "expired": "Deze code is verlopen. Vraag een nieuwe aan.",
+        "tooManyAttempts": "Te veel verkeerde codes. Vraag een nieuwe aan.",
+        "rateLimited": "Te veel pogingen. Wacht een paar minuten en probeer het opnieuw.",
+        "sendFailed": "De code kon niet worden verstuurd. Probeer het over een paar minuten opnieuw.",
+        "signInFailed": "Inloggen mislukt. Probeer het opnieuw."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "ID van de actieve organisatie",
             "organization_slug": "Slug van de actieve organisatie",
             "organization_role": "Rol in de actieve organisatie",
+            "organization_permissions": "Rechten in de actieve organisatie",
+            "organization_teams": "Teams in de actieve organisatie",
             "organizations": "Lidmaatschappen van organisaties",
             "organization_ids": "ID’s van organisaties waarvan de gebruiker lid is"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Accountgegevens geëxporteerd",
             "self_delete": "Eigen account verwijderd",
             "export_csv": "Gebruikers geëxporteerd naar CSV",
-            "import": "Gebruikers geïmporteerd"
+            "import": "Gebruikers geïmporteerd",
+            "remove_phone_number": "Heeft het telefoonnummer verwijderd"
           },
           "oauth_client": {
             "create": "OAuth-client geregistreerd",
@@ -1953,7 +1981,15 @@
             "invite": "Lid uitgenodigd",
             "cancel_invitation": "Uitnodiging geannuleerd",
             "update_member_role": "Rol van lid gewijzigd",
-            "remove_member": "Lid verwijderd"
+            "remove_member": "Lid verwijderd",
+            "create_role": "Organisatierol gemaakt",
+            "update_role": "Organisatierol gewijzigd",
+            "delete_role": "Organisatierol verwijderd",
+            "create_team": "Team gemaakt",
+            "update_team": "Team hernoemd",
+            "delete_team": "Team verwijderd",
+            "add_team_member": "Lid aan een team toegevoegd",
+            "remove_team_member": "Lid uit een team verwijderd"
           },
           "sso_provider": {
             "create": "SSO-provider geregistreerd",
@@ -2240,6 +2276,61 @@
           "lastOwner": "Een organisatie heeft minstens één eigenaar nodig. Maak eerst een ander lid eigenaar.",
           "publicDelete": "De Public-werkruimte kan niet worden verwijderd.",
           "organizationNotFound": "Organisatie niet gevonden."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Eigen rollen",
+          "teamsTitle": "Teams",
+          "rolesDescription": "Rollen van deze organisatie naast eigenaar, beheerder en lid, elk met eigen rechten. Je geeft ze aan leden zoals de ingebouwde, en tokens bevatten de naam van de rol (organization.role) en de rechten (organization.permissions).",
+          "noRoles": "Geen eigen rol.",
+          "memberCount": "{count, plural, one {# lid} other {# leden}}",
+          "noPermissions": "Geen rechten",
+          "edit": "Bewerken",
+          "delete": "Verwijderen",
+          "editRole": "{role} bewerken",
+          "deleteRole": "{role} verwijderen",
+          "addRole": "Rol toevoegen",
+          "deleteRoleTitle": "{role} verwijderen?",
+          "deleteRoleDescription": "De rol verdwijnt uit deze organisatie. Hij kan pas worden verwijderd als geen lid hem heeft.",
+          "cancel": "Annuleren",
+          "roleDeleted": "Rol verwijderd.",
+          "roleSaved": "Rol opgeslagen.",
+          "roleDialogDescription": "Vink aan wat de rol in de organisatie mag. Eigenaren en beheerders van de organisatie kunnen rollen ook zelf beheren.",
+          "roleName": "Naam van de rol",
+          "roleNameHint": "2 tot 32 kleine letters, cijfers, koppeltekens of underscores, beginnend met een letter. Later niet te wijzigen.",
+          "permissions": "Rechten",
+          "save": "Opslaan",
+          "teamsDescription": "Groepen leden binnen de organisatie. Tokens bevatten de teams van het lid (organization.teams).",
+          "noTeams": "Geen team.",
+          "teamCreated": "Team gemaakt.",
+          "newTeam": "Nieuw team",
+          "createTeam": "Team maken",
+          "teamRenamed": "Team hernoemd.",
+          "teamName": "Teamnaam",
+          "renameTeam": "{team} hernoemen",
+          "rename": "Hernoemen",
+          "deleteTeam": "{team} verwijderen",
+          "noTeamMembers": "Geen leden in dit team.",
+          "removeFromTeam": "{email} uit {team} verwijderen",
+          "remove": "Verwijderen",
+          "teamMemberRemoved": "Lid uit het team verwijderd.",
+          "teamMemberAdded": "Lid aan het team toegevoegd.",
+          "addToTeam": "Een lid toevoegen aan {team}",
+          "memberEmail": "E-mail van het lid",
+          "add": "Toevoegen",
+          "deleteTeamTitle": "{team} verwijderen?",
+          "deleteTeamDescription": "Het team en zijn ledenlijst worden verwijderd. De leden blijven in de organisatie.",
+          "teamDeleted": "Team verwijderd.",
+          "errors": {
+            "invalidName": "Een rolnaam heeft 2 tot 32 kleine letters, cijfers, koppeltekens of underscores en begint met een letter.",
+            "reservedName": "owner, admin en member zijn ingebouwde rollen.",
+            "nameTaken": "Deze organisatie heeft al een rol met deze naam.",
+            "invalidPermissions": "Een van de rechten is onbekend.",
+            "roleInUse": "Leden hebben deze rol: geef ze eerst een andere rol.",
+            "notFound": "Niet gevonden in deze organisatie.",
+            "notMember": "Deze persoon is geen lid van de organisatie.",
+            "alreadyInTeam": "Dit lid zit al in het team.",
+            "invalidTeamName": "Een teamnaam heeft 1 tot 64 tekens."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "Je bekijkt dit account als <strong>{email}</strong>.",
       "stop": "Stoppen met meekijken"
+    },
+    "phone": {
+      "title": "Telefoonnummer",
+      "description": "Log in met een code die per sms naar dit nummer wordt gestuurd.",
+      "none": "Geen telefoonnummer",
+      "add": "Nummer toevoegen",
+      "change": "Wijzigen",
+      "remove": "Verwijderen",
+      "phoneLabel": "Telefoonnummer",
+      "phoneHint": "Internationaal formaat, met + en de landcode. We sturen een code per sms om het te controleren.",
+      "send": "Code versturen",
+      "cancel": "Annuleren",
+      "codeLabel": "Code verstuurd naar {phone}",
+      "verify": "Nummer opslaan",
+      "invalidPhone": "Vul het nummer in internationaal formaat in, zoals +31612345678.",
+      "sendFailed": "De code kon niet worden verstuurd. Probeer het over een paar minuten opnieuw.",
+      "verifyFailed": "Die code klopt niet of is verlopen.",
+      "taken": "Een ander account gebruikt dit nummer al.",
+      "saved": "Nummer opgeslagen.",
+      "removeFailed": "Het nummer kon niet worden verwijderd.",
+      "removed": "Nummer verwijderd."
     }
   },
   "acceptInvitation": {

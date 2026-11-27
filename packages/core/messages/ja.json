@@ -42,7 +42,8 @@
         "invalidEmail": "有効なメールアドレスを入力してください。",
         "error": "メールを送信できませんでした。しばらくしてからもう一度お試しください。"
       },
-      "addAccountDescription": "このブラウザでサインイン済みのアカウントはそのまま維持されます。"
+      "addAccountDescription": "このブラウザでサインイン済みのアカウントはそのまま維持されます。",
+      "phoneCode": "SMS でサインインコードを送る"
     },
     "emailCode": {
       "title": "コードでサインイン",
@@ -200,6 +201,30 @@
       "setUp": "2 段階認証を設定",
       "later": "後で通知",
       "continue": "続行"
+    },
+    "phoneCode": {
+      "title": "SMS でサインイン",
+      "description": "アカウントの電話番号に 6 桁のコードを SMS で送ります。",
+      "phoneLabel": "電話番号",
+      "phoneHint": "国際形式（+ と国番号から）。",
+      "send": "コードを送信",
+      "sending": "送信中…",
+      "sentTitle": "電話を確認してください",
+      "sent": "{phone} を使うアカウントがあれば、6 桁のコードを送信しました。有効期限は {minutes} 分です。",
+      "codeLabel": "サインインコード",
+      "verify": "サインイン",
+      "verifying": "サインイン中…",
+      "newCode": "届きませんか？新しいコードを送る",
+      "usePassword": "パスワードでサインイン",
+      "errors": {
+        "invalidPhone": "+819012345678 のように国際形式で入力してください。",
+        "invalidCode": "コードが正しくありません。確認してもう一度お試しください。",
+        "expired": "コードの有効期限が切れました。新しいコードを請求してください。",
+        "tooManyAttempts": "誤ったコードが多すぎます。新しいコードを請求してください。",
+        "rateLimited": "試行回数が多すぎます。数分待ってからもう一度お試しください。",
+        "sendFailed": "コードを送信できませんでした。数分後にもう一度お試しください。",
+        "signInFailed": "サインインできませんでした。もう一度お試しください。"
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "アクティブな組織の ID",
             "organization_slug": "アクティブな組織のスラッグ",
             "organization_role": "アクティブな組織でのロール",
+            "organization_permissions": "アクティブな組織での権限",
+            "organization_teams": "アクティブな組織でのチーム",
             "organizations": "組織のメンバーシップ",
             "organization_ids": "所属組織の ID"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "アカウントデータをエクスポート",
             "self_delete": "自分のアカウントを削除",
             "export_csv": "ユーザーを CSV にエクスポート",
-            "import": "ユーザーをインポート"
+            "import": "ユーザーをインポート",
+            "remove_phone_number": "電話番号を削除"
           },
           "oauth_client": {
             "create": "OAuth クライアントを登録",
@@ -1953,7 +1981,15 @@
             "invite": "メンバーを招待",
             "cancel_invitation": "招待をキャンセル",
             "update_member_role": "メンバーのロールを変更",
-            "remove_member": "メンバーを削除"
+            "remove_member": "メンバーを削除",
+            "create_role": "組織ロールを作成",
+            "update_role": "組織ロールを変更",
+            "delete_role": "組織ロールを削除",
+            "create_team": "チームを作成",
+            "update_team": "チーム名を変更",
+            "delete_team": "チームを削除",
+            "add_team_member": "チームにメンバーを追加",
+            "remove_team_member": "チームからメンバーを削除"
           },
           "sso_provider": {
             "create": "SSO プロバイダーを登録",
@@ -2240,6 +2276,61 @@
           "lastOwner": "組織には少なくとも 1 人のオーナーが必要です。先に別のメンバーをオーナーにしてください。",
           "publicDelete": "Public ワークスペースは削除できません。",
           "organizationNotFound": "組織が見つかりません。"
+        },
+        "rolesTeams": {
+          "rolesTitle": "カスタムロール",
+          "teamsTitle": "チーム",
+          "rolesDescription": "オーナー、管理者、メンバーに加えたこの組織独自のロールで、それぞれ独自の権限を持ちます。組み込みロールと同様にメンバーに付与でき、トークンにはロール名（organization.role）と権限（organization.permissions）が含まれます。",
+          "noRoles": "カスタムロールはありません。",
+          "memberCount": "メンバー {count} 人",
+          "noPermissions": "権限なし",
+          "edit": "編集",
+          "delete": "削除",
+          "editRole": "{role} を編集",
+          "deleteRole": "{role} を削除",
+          "addRole": "ロールを追加",
+          "deleteRoleTitle": "{role} を削除しますか？",
+          "deleteRoleDescription": "この組織からロールがなくなります。どのメンバーも持っていない場合にのみ削除できます。",
+          "cancel": "キャンセル",
+          "roleDeleted": "ロールを削除しました。",
+          "roleSaved": "ロールを保存しました。",
+          "roleDialogDescription": "このロールが組織で行えることにチェックを入れてください。組織のオーナーと管理者もロールを管理できます。",
+          "roleName": "ロール名",
+          "roleNameHint": "英小文字、数字、ハイフン、アンダースコアで 2〜32 文字、先頭は英字。後から変更できません。",
+          "permissions": "権限",
+          "save": "保存",
+          "teamsDescription": "組織内のメンバーのグループ。トークンにはメンバーのチーム（organization.teams）が含まれます。",
+          "noTeams": "チームはありません。",
+          "teamCreated": "チームを作成しました。",
+          "newTeam": "新しいチーム",
+          "createTeam": "チームを作成",
+          "teamRenamed": "チーム名を変更しました。",
+          "teamName": "チーム名",
+          "renameTeam": "{team} の名前を変更",
+          "rename": "名前を変更",
+          "deleteTeam": "{team} を削除",
+          "noTeamMembers": "このチームにメンバーはいません。",
+          "removeFromTeam": "{email} を {team} から外す",
+          "remove": "外す",
+          "teamMemberRemoved": "チームからメンバーを外しました。",
+          "teamMemberAdded": "チームにメンバーを追加しました。",
+          "addToTeam": "{team} にメンバーを追加",
+          "memberEmail": "メンバーのメールアドレス",
+          "add": "追加",
+          "deleteTeamTitle": "{team} を削除しますか？",
+          "deleteTeamDescription": "チームとそのメンバー一覧が削除されます。メンバーは組織に残ります。",
+          "teamDeleted": "チームを削除しました。",
+          "errors": {
+            "invalidName": "ロール名は英小文字、数字、ハイフン、アンダースコアの 2〜32 文字で、先頭は英字です。",
+            "reservedName": "owner、admin、member は組み込みロールです。",
+            "nameTaken": "この組織には同じ名前のロールがすでにあります。",
+            "invalidPermissions": "不明な権限が含まれています。",
+            "roleInUse": "このロールを持つメンバーがいます。先に別のロールを付与してください。",
+            "notFound": "この組織に見つかりません。",
+            "notMember": "この人は組織のメンバーではありません。",
+            "alreadyInTeam": "このメンバーはすでにチームにいます。",
+            "invalidTeamName": "チーム名は 1〜64 文字です。"
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "<strong>{email}</strong> としてこのアカウントを表示しています。",
       "stop": "代理サインインを終了"
+    },
+    "phone": {
+      "title": "電話番号",
+      "description": "この番号に SMS で届くコードでサインインします。",
+      "none": "電話番号は未登録です",
+      "add": "番号を追加",
+      "change": "変更",
+      "remove": "削除",
+      "phoneLabel": "電話番号",
+      "phoneHint": "国際形式（+ と国番号から）。確認のためコードを SMS で送ります。",
+      "send": "コードを送信",
+      "cancel": "キャンセル",
+      "codeLabel": "{phone} に送信したコード",
+      "verify": "番号を保存",
+      "invalidPhone": "+819012345678 のように国際形式で入力してください。",
+      "sendFailed": "コードを送信できませんでした。数分後にもう一度お試しください。",
+      "verifyFailed": "コードが正しくないか、有効期限が切れています。",
+      "taken": "この番号は別のアカウントで使われています。",
+      "saved": "番号を保存しました。",
+      "removeFailed": "番号を削除できませんでした。",
+      "removed": "番号を削除しました。"
     }
   },
   "acceptInvitation": {

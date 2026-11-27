@@ -42,7 +42,8 @@
         "invalidEmail": "Indtast en gyldig e-mailadresse.",
         "error": "E-mailen kunne ikke sendes. Prøv igen om et minut."
       },
-      "addAccountDescription": "Konti, der allerede er logget ind i denne browser, forbliver logget ind."
+      "addAccountDescription": "Konti, der allerede er logget ind i denne browser, forbliver logget ind.",
+      "phoneCode": "Send mig en loginkode på sms"
     },
     "emailCode": {
       "title": "Log ind med en kode",
@@ -200,6 +201,30 @@
       "setUp": "Konfigurer totrinsgodkendelse",
       "later": "Påmind mig senere",
       "continue": "Fortsæt"
+    },
+    "phoneCode": {
+      "title": "Log ind med sms",
+      "description": "Vi sender en 6-cifret kode på sms til telefonnummeret på din konto.",
+      "phoneLabel": "Telefonnummer",
+      "phoneHint": "Internationalt format, med + og landekode.",
+      "send": "Send kode",
+      "sending": "Sender…",
+      "sentTitle": "Tjek din telefon",
+      "sent": "Hvis en konto bruger {phone}, er en 6-cifret kode på vej. Den udløber om {minutes} minutter.",
+      "codeLabel": "Loginkode",
+      "verify": "Log ind",
+      "verifying": "Logger ind…",
+      "newCode": "Fik du den ikke? Send en ny kode",
+      "usePassword": "Brug din adgangskode i stedet",
+      "errors": {
+        "invalidPhone": "Indtast nummeret i internationalt format, fx +4512345678.",
+        "invalidCode": "Koden er forkert. Tjek den, og prøv igen.",
+        "expired": "Koden er udløbet. Bed om en ny.",
+        "tooManyAttempts": "For mange forkerte koder. Bed om en ny.",
+        "rateLimited": "For mange forsøg. Vent et par minutter, og prøv igen.",
+        "sendFailed": "Koden kunne ikke sendes. Prøv igen om et par minutter.",
+        "signInFailed": "Kunne ikke logge ind. Prøv igen."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "ID på den aktive organisation",
             "organization_slug": "Slug på den aktive organisation",
             "organization_role": "Rolle i den aktive organisation",
+            "organization_permissions": "Tilladelser i den aktive organisation",
+            "organization_teams": "Teams i den aktive organisation",
             "organizations": "Medlemskaber af organisationer",
             "organization_ids": "ID'er for organisationer, som brugeren er medlem af"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Eksporterede kontodata",
             "self_delete": "Slettede sin egen konto",
             "export_csv": "Eksporterede brugere til CSV",
-            "import": "Importerede brugere"
+            "import": "Importerede brugere",
+            "remove_phone_number": "Fjernede sit telefonnummer"
           },
           "oauth_client": {
             "create": "Registrerede OAuth-klient",
@@ -1953,7 +1981,15 @@
             "invite": "Inviterede medlem",
             "cancel_invitation": "Annullerede invitation",
             "update_member_role": "Ændrede medlemsrolle",
-            "remove_member": "Fjernede medlem"
+            "remove_member": "Fjernede medlem",
+            "create_role": "Oprettede en organisationsrolle",
+            "update_role": "Ændrede en organisationsrolle",
+            "delete_role": "Slettede en organisationsrolle",
+            "create_team": "Oprettede et team",
+            "update_team": "Omdøbte et team",
+            "delete_team": "Slettede et team",
+            "add_team_member": "Føjede et medlem til et team",
+            "remove_team_member": "Fjernede et medlem fra et team"
           },
           "sso_provider": {
             "create": "Registrerede SSO-udbyder",
@@ -2240,6 +2276,61 @@
           "lastOwner": "En organisation skal have mindst én ejer. Gør først et andet medlem til ejer.",
           "publicDelete": "Arbejdsområdet Public kan ikke slettes.",
           "organizationNotFound": "Organisationen blev ikke fundet."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Egne roller",
+          "teamsTitle": "Teams",
+          "rolesDescription": "Roller for denne organisation ud over ejer, admin og medlem, hver med egne tilladelser. De gives til medlemmer som de indbyggede, og tokens indeholder rollens navn (organization.role) og tilladelser (organization.permissions).",
+          "noRoles": "Ingen egen rolle.",
+          "memberCount": "{count, plural, one {# medlem} other {# medlemmer}}",
+          "noPermissions": "Ingen tilladelser",
+          "edit": "Rediger",
+          "delete": "Slet",
+          "editRole": "Rediger {role}",
+          "deleteRole": "Slet {role}",
+          "addRole": "Tilføj rolle",
+          "deleteRoleTitle": "Slet {role}?",
+          "deleteRoleDescription": "Rollen forsvinder fra organisationen. Den kan kun slettes, når intet medlem har den.",
+          "cancel": "Annuller",
+          "roleDeleted": "Rollen er slettet.",
+          "roleSaved": "Rollen er gemt.",
+          "roleDialogDescription": "Markér, hvad rollen må i organisationen. Organisationens ejere og administratorer kan også selv administrere roller.",
+          "roleName": "Rollenavn",
+          "roleNameHint": "2 til 32 små bogstaver, cifre, bindestreger eller understregninger, og begynder med et bogstav. Kan ikke ændres senere.",
+          "permissions": "Tilladelser",
+          "save": "Gem",
+          "teamsDescription": "Grupper af medlemmer i organisationen. Tokens indeholder medlemmets teams (organization.teams).",
+          "noTeams": "Intet team.",
+          "teamCreated": "Team oprettet.",
+          "newTeam": "Nyt team",
+          "createTeam": "Opret team",
+          "teamRenamed": "Team omdøbt.",
+          "teamName": "Teamnavn",
+          "renameTeam": "Omdøb {team}",
+          "rename": "Omdøb",
+          "deleteTeam": "Slet {team}",
+          "noTeamMembers": "Ingen medlemmer i teamet.",
+          "removeFromTeam": "Fjern {email} fra {team}",
+          "remove": "Fjern",
+          "teamMemberRemoved": "Medlemmet er fjernet fra teamet.",
+          "teamMemberAdded": "Medlemmet er føjet til teamet.",
+          "addToTeam": "Tilføj et medlem til {team}",
+          "memberEmail": "Medlemmets e-mail",
+          "add": "Tilføj",
+          "deleteTeamTitle": "Slet {team}?",
+          "deleteTeamDescription": "Teamet og dets medlemsliste slettes. Medlemmerne bliver i organisationen.",
+          "teamDeleted": "Team slettet.",
+          "errors": {
+            "invalidName": "Et rollenavn har 2 til 32 små bogstaver, cifre, bindestreger eller understregninger og begynder med et bogstav.",
+            "reservedName": "owner, admin og member er indbyggede roller.",
+            "nameTaken": "Organisationen har allerede en rolle med dette navn.",
+            "invalidPermissions": "En af tilladelserne er ukendt.",
+            "roleInUse": "Medlemmer har denne rolle: giv dem en anden rolle først.",
+            "notFound": "Findes ikke i organisationen.",
+            "notMember": "Personen er ikke medlem af organisationen.",
+            "alreadyInTeam": "Medlemmet er allerede i teamet.",
+            "invalidTeamName": "Et teamnavn har 1 til 64 tegn."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "Du ser denne konto som <strong>{email}</strong>.",
       "stop": "Stop med at logge ind som bruger"
+    },
+    "phone": {
+      "title": "Telefonnummer",
+      "description": "Log ind med en kode sendt på sms til dette nummer.",
+      "none": "Intet telefonnummer",
+      "add": "Tilføj et nummer",
+      "change": "Skift",
+      "remove": "Fjern",
+      "phoneLabel": "Telefonnummer",
+      "phoneHint": "Internationalt format, med + og landekode. Vi sender en kode på sms for at bekræfte det.",
+      "send": "Send kode",
+      "cancel": "Annuller",
+      "codeLabel": "Kode sendt til {phone}",
+      "verify": "Gem nummer",
+      "invalidPhone": "Indtast nummeret i internationalt format, fx +4512345678.",
+      "sendFailed": "Koden kunne ikke sendes. Prøv igen om et par minutter.",
+      "verifyFailed": "Koden er forkert eller udløbet.",
+      "taken": "En anden konto bruger allerede dette nummer.",
+      "saved": "Nummeret er gemt.",
+      "removeFailed": "Nummeret kunne ikke fjernes.",
+      "removed": "Nummeret er fjernet."
     }
   },
   "acceptInvitation": {

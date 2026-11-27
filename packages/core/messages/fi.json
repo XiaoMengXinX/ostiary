@@ -42,7 +42,8 @@
         "invalidEmail": "Anna kelvollinen sähköpostiosoite.",
         "error": "Sähköpostia ei voitu lähettää. Yritä uudelleen hetken kuluttua."
       },
-      "addAccountDescription": "Tässä selaimessa jo kirjautuneet tilit pysyvät kirjautuneina."
+      "addAccountDescription": "Tässä selaimessa jo kirjautuneet tilit pysyvät kirjautuneina.",
+      "phoneCode": "Lähetä kirjautumiskoodi tekstiviestillä"
     },
     "emailCode": {
       "title": "Kirjaudu koodilla",
@@ -200,6 +201,30 @@
       "setUp": "Määritä kaksivaiheinen tunnistautuminen",
       "later": "Muistuta myöhemmin",
       "continue": "Jatka"
+    },
+    "phoneCode": {
+      "title": "Kirjaudu tekstiviestillä",
+      "description": "Lähetämme 6-numeroisen koodin tekstiviestillä tilisi puhelinnumeroon.",
+      "phoneLabel": "Puhelinnumero",
+      "phoneHint": "Kansainvälisessä muodossa, alussa + ja maatunnus.",
+      "send": "Lähetä koodi",
+      "sending": "Lähetetään…",
+      "sentTitle": "Katso puhelimesi",
+      "sent": "Jos jokin tili käyttää numeroa {phone}, 6-numeroinen koodi on tulossa. Se vanhenee {minutes} minuutissa.",
+      "codeLabel": "Kirjautumiskoodi",
+      "verify": "Kirjaudu",
+      "verifying": "Kirjaudutaan…",
+      "newCode": "Etkö saanut sitä? Lähetä uusi koodi",
+      "usePassword": "Käytä mieluummin salasanaa",
+      "errors": {
+        "invalidPhone": "Anna numero kansainvälisessä muodossa, esimerkiksi +358401234567.",
+        "invalidCode": "Koodi ei ole oikein. Tarkista se ja yritä uudelleen.",
+        "expired": "Koodi on vanhentunut. Pyydä uusi.",
+        "tooManyAttempts": "Liian monta väärää koodia. Pyydä uusi.",
+        "rateLimited": "Liian monta yritystä. Odota muutama minuutti ja yritä uudelleen.",
+        "sendFailed": "Koodia ei voitu lähettää. Yritä muutaman minuutin päästä uudelleen.",
+        "signInFailed": "Kirjautuminen epäonnistui. Yritä uudelleen."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "Aktiivisen organisaation tunnus",
             "organization_slug": "Aktiivisen organisaation slug",
             "organization_role": "Rooli aktiivisessa organisaatiossa",
+            "organization_permissions": "Oikeudet aktiivisessa organisaatiossa",
+            "organization_teams": "Tiimit aktiivisessa organisaatiossa",
             "organizations": "Organisaatiojäsenyydet",
             "organization_ids": "Käyttäjän organisaatioiden tunnukset"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Vei tilin tiedot",
             "self_delete": "Poisti oman tilinsä",
             "export_csv": "Vei käyttäjät CSV-muodossa",
-            "import": "Toi käyttäjiä"
+            "import": "Toi käyttäjiä",
+            "remove_phone_number": "Poisti puhelinnumeronsa"
           },
           "oauth_client": {
             "create": "Rekisteröi OAuth-asiakkaan",
@@ -1953,7 +1981,15 @@
             "invite": "Kutsui jäsenen",
             "cancel_invitation": "Peruutti kutsun",
             "update_member_role": "Muutti jäsenen roolia",
-            "remove_member": "Poisti jäsenen"
+            "remove_member": "Poisti jäsenen",
+            "create_role": "Loi organisaation roolin",
+            "update_role": "Muutti organisaation roolia",
+            "delete_role": "Poisti organisaation roolin",
+            "create_team": "Loi tiimin",
+            "update_team": "Nimesi tiimin uudelleen",
+            "delete_team": "Poisti tiimin",
+            "add_team_member": "Lisäsi jäsenen tiimiin",
+            "remove_team_member": "Poisti jäsenen tiimistä"
           },
           "sso_provider": {
             "create": "Rekisteröi SSO-palveluntarjoajan",
@@ -2240,6 +2276,61 @@
           "lastOwner": "Organisaatiolla on oltava vähintään yksi omistaja. Tee ensin toisesta jäsenestä omistaja.",
           "publicDelete": "Public-työtilaa ei voi poistaa.",
           "organizationNotFound": "Organisaatiota ei löytynyt."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Omat roolit",
+          "teamsTitle": "Tiimit",
+          "rolesDescription": "Organisaation omat roolit omistajan, ylläpitäjän ja jäsenen lisäksi, kullakin omat oikeutensa. Niitä annetaan jäsenille kuten valmiita rooleja, ja tunnisteissa on roolin nimi (organization.role) ja oikeudet (organization.permissions).",
+          "noRoles": "Ei omia rooleja.",
+          "memberCount": "{count, plural, one {# jäsen} other {# jäsentä}}",
+          "noPermissions": "Ei oikeuksia",
+          "edit": "Muokkaa",
+          "delete": "Poista",
+          "editRole": "Muokkaa: {role}",
+          "deleteRole": "Poista: {role}",
+          "addRole": "Lisää rooli",
+          "deleteRoleTitle": "Poistetaanko {role}?",
+          "deleteRoleDescription": "Rooli poistuu organisaatiosta. Sen voi poistaa vasta, kun yhdelläkään jäsenellä ei ole sitä.",
+          "cancel": "Peruuta",
+          "roleDeleted": "Rooli poistettu.",
+          "roleSaved": "Rooli tallennettu.",
+          "roleDialogDescription": "Valitse, mitä rooli saa tehdä organisaatiossa. Organisaation omistajat ja ylläpitäjät voivat myös itse hallita rooleja.",
+          "roleName": "Roolin nimi",
+          "roleNameHint": "2–32 pientä kirjainta, numeroa, yhdysmerkkiä tai alaviivaa, alkaen kirjaimella. Ei voi muuttaa myöhemmin.",
+          "permissions": "Oikeudet",
+          "save": "Tallenna",
+          "teamsDescription": "Jäsenryhmiä organisaation sisällä. Tunnisteissa on jäsenen tiimit (organization.teams).",
+          "noTeams": "Ei tiimejä.",
+          "teamCreated": "Tiimi luotu.",
+          "newTeam": "Uusi tiimi",
+          "createTeam": "Luo tiimi",
+          "teamRenamed": "Tiimi nimetty uudelleen.",
+          "teamName": "Tiimin nimi",
+          "renameTeam": "Nimeä {team} uudelleen",
+          "rename": "Nimeä uudelleen",
+          "deleteTeam": "Poista {team}",
+          "noTeamMembers": "Tiimissä ei ole jäseniä.",
+          "removeFromTeam": "Poista {email} tiimistä {team}",
+          "remove": "Poista",
+          "teamMemberRemoved": "Jäsen poistettu tiimistä.",
+          "teamMemberAdded": "Jäsen lisätty tiimiin.",
+          "addToTeam": "Lisää jäsen tiimiin {team}",
+          "memberEmail": "Jäsenen sähköposti",
+          "add": "Lisää",
+          "deleteTeamTitle": "Poistetaanko {team}?",
+          "deleteTeamDescription": "Tiimi ja sen jäsenluettelo poistetaan. Jäsenet pysyvät organisaatiossa.",
+          "teamDeleted": "Tiimi poistettu.",
+          "errors": {
+            "invalidName": "Roolin nimessä on 2–32 pientä kirjainta, numeroa, yhdysmerkkiä tai alaviivaa, ja se alkaa kirjaimella.",
+            "reservedName": "owner, admin ja member ovat valmiita rooleja.",
+            "nameTaken": "Organisaatiolla on jo samanniminen rooli.",
+            "invalidPermissions": "Jokin oikeuksista on tuntematon.",
+            "roleInUse": "Jäsenillä on tämä rooli: anna heille ensin toinen rooli.",
+            "notFound": "Ei löytynyt tästä organisaatiosta.",
+            "notMember": "Henkilö ei ole organisaation jäsen.",
+            "alreadyInTeam": "Jäsen on jo tiimissä.",
+            "invalidTeamName": "Tiimin nimessä on 1–64 merkkiä."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "Tarkastelet tätä tiliä käyttäjänä <strong>{email}</strong>.",
       "stop": "Lopeta käyttäjänä toimiminen"
+    },
+    "phone": {
+      "title": "Puhelinnumero",
+      "description": "Kirjaudu koodilla, joka lähetetään tekstiviestillä tähän numeroon.",
+      "none": "Ei puhelinnumeroa",
+      "add": "Lisää numero",
+      "change": "Vaihda",
+      "remove": "Poista",
+      "phoneLabel": "Puhelinnumero",
+      "phoneHint": "Kansainvälisessä muodossa, alussa + ja maatunnus. Lähetämme tarkistuskoodin tekstiviestillä.",
+      "send": "Lähetä koodi",
+      "cancel": "Peruuta",
+      "codeLabel": "Koodi lähetetty numeroon {phone}",
+      "verify": "Tallenna numero",
+      "invalidPhone": "Anna numero kansainvälisessä muodossa, esimerkiksi +358401234567.",
+      "sendFailed": "Koodia ei voitu lähettää. Yritä muutaman minuutin päästä uudelleen.",
+      "verifyFailed": "Koodi ei ole oikein tai se on vanhentunut.",
+      "taken": "Toinen tili käyttää jo tätä numeroa.",
+      "saved": "Numero tallennettu.",
+      "removeFailed": "Numeroa ei voitu poistaa.",
+      "removed": "Numero poistettu."
     }
   },
   "acceptInvitation": {

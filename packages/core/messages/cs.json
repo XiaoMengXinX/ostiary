@@ -42,7 +42,8 @@
         "invalidEmail": "Zadejte platnou e-mailovou adresu.",
         "error": "E-mail se nepodařilo odeslat. Zkuste to znovu za minutu."
       },
-      "addAccountDescription": "Účty, které jsou v tomto prohlížeči už přihlášené, zůstanou přihlášené."
+      "addAccountDescription": "Účty, které jsou v tomto prohlížeči už přihlášené, zůstanou přihlášené.",
+      "phoneCode": "Poslat přihlašovací kód SMS"
     },
     "emailCode": {
       "title": "Přihlášení kódem",
@@ -200,6 +201,30 @@
       "setUp": "Nastavit dvoufázové ověření",
       "later": "Připomenout později",
       "continue": "Pokračovat"
+    },
+    "phoneCode": {
+      "title": "Přihlásit se přes SMS",
+      "description": "Pošleme 6místný kód SMS na telefonní číslo vašeho účtu.",
+      "phoneLabel": "Telefonní číslo",
+      "phoneHint": "Mezinárodní formát, s + a předvolbou země.",
+      "send": "Poslat kód",
+      "sending": "Odesílání…",
+      "sentTitle": "Podívejte se do telefonu",
+      "sent": "Pokud nějaký účet používá {phone}, 6místný kód je na cestě. Platí {minutes} minut.",
+      "codeLabel": "Přihlašovací kód",
+      "verify": "Přihlásit se",
+      "verifying": "Přihlašování…",
+      "newCode": "Nedorazil? Poslat nový kód",
+      "usePassword": "Použít raději heslo",
+      "errors": {
+        "invalidPhone": "Zadejte číslo v mezinárodním formátu, třeba +420601234567.",
+        "invalidCode": "Kód není správný. Zkontrolujte ho a zkuste to znovu.",
+        "expired": "Platnost kódu vypršela. Vyžádejte si nový.",
+        "tooManyAttempts": "Příliš mnoho špatných kódů. Vyžádejte si nový.",
+        "rateLimited": "Příliš mnoho pokusů. Počkejte pár minut a zkuste to znovu.",
+        "sendFailed": "Kód se nepodařilo odeslat. Zkuste to za pár minut.",
+        "signInFailed": "Přihlášení se nezdařilo. Zkuste to znovu."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "ID aktivní organizace",
             "organization_slug": "Slug aktivní organizace",
             "organization_role": "Role v aktivní organizaci",
+            "organization_permissions": "Oprávnění v aktivní organizaci",
+            "organization_teams": "Týmy v aktivní organizaci",
             "organizations": "Členství v organizacích",
             "organization_ids": "ID organizací, jejichž je uživatel členem"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Export dat účtu",
             "self_delete": "Smazání vlastního účtu",
             "export_csv": "Export uživatelů do CSV",
-            "import": "Import uživatelů"
+            "import": "Import uživatelů",
+            "remove_phone_number": "Odebral(a) své telefonní číslo"
           },
           "oauth_client": {
             "create": "Registrace klienta OAuth",
@@ -1953,7 +1981,15 @@
             "invite": "Pozvání člena",
             "cancel_invitation": "Zrušení pozvánky",
             "update_member_role": "Změna role člena",
-            "remove_member": "Odebrání člena"
+            "remove_member": "Odebrání člena",
+            "create_role": "Vytvořena role organizace",
+            "update_role": "Změněna role organizace",
+            "delete_role": "Smazána role organizace",
+            "create_team": "Vytvořen tým",
+            "update_team": "Přejmenován tým",
+            "delete_team": "Smazán tým",
+            "add_team_member": "Přidán člen do týmu",
+            "remove_team_member": "Odebrán člen z týmu"
           },
           "sso_provider": {
             "create": "Registrace poskytovatele SSO",
@@ -2240,6 +2276,61 @@
           "lastOwner": "Organizace musí mít alespoň jednoho vlastníka. Nejprve udělejte vlastníkem jiného člena.",
           "publicDelete": "Pracovní prostor Public nelze smazat.",
           "organizationNotFound": "Organizace nebyla nalezena."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Vlastní role",
+          "teamsTitle": "Týmy",
+          "rolesDescription": "Role této organizace navíc k vlastníkovi, správci a členovi, každá s vlastními oprávněními. Přidělují se členům jako vestavěné a tokeny nesou název role (organization.role) a oprávnění (organization.permissions).",
+          "noRoles": "Žádná vlastní role.",
+          "memberCount": "{count, plural, one {# člen} few {# členové} many {# člena} other {# členů}}",
+          "noPermissions": "Žádná oprávnění",
+          "edit": "Upravit",
+          "delete": "Smazat",
+          "editRole": "Upravit {role}",
+          "deleteRole": "Smazat {role}",
+          "addRole": "Přidat roli",
+          "deleteRoleTitle": "Smazat {role}?",
+          "deleteRoleDescription": "Role z organizace zmizí. Smazat ji lze, až ji nebude mít žádný člen.",
+          "cancel": "Zrušit",
+          "roleDeleted": "Role smazána.",
+          "roleSaved": "Role uložena.",
+          "roleDialogDescription": "Zaškrtněte, co role smí v organizaci dělat. Vlastníci a správci organizace mohou role spravovat i sami.",
+          "roleName": "Název role",
+          "roleNameHint": "2 až 32 malých písmen, číslic, pomlček nebo podtržítek, začínající písmenem. Později ho nelze změnit.",
+          "permissions": "Oprávnění",
+          "save": "Uložit",
+          "teamsDescription": "Skupiny členů v organizaci. Tokeny nesou týmy člena (organization.teams).",
+          "noTeams": "Žádný tým.",
+          "teamCreated": "Tým vytvořen.",
+          "newTeam": "Nový tým",
+          "createTeam": "Vytvořit tým",
+          "teamRenamed": "Tým přejmenován.",
+          "teamName": "Název týmu",
+          "renameTeam": "Přejmenovat {team}",
+          "rename": "Přejmenovat",
+          "deleteTeam": "Smazat {team}",
+          "noTeamMembers": "V týmu nejsou žádní členové.",
+          "removeFromTeam": "Odebrat {email} z {team}",
+          "remove": "Odebrat",
+          "teamMemberRemoved": "Člen odebrán z týmu.",
+          "teamMemberAdded": "Člen přidán do týmu.",
+          "addToTeam": "Přidat člena do {team}",
+          "memberEmail": "E-mail člena",
+          "add": "Přidat",
+          "deleteTeamTitle": "Smazat {team}?",
+          "deleteTeamDescription": "Tým i jeho seznam členů se smažou. Členové zůstanou v organizaci.",
+          "teamDeleted": "Tým smazán.",
+          "errors": {
+            "invalidName": "Název role má 2 až 32 malých písmen, číslic, pomlček nebo podtržítek a začíná písmenem.",
+            "reservedName": "owner, admin a member jsou vestavěné role.",
+            "nameTaken": "Tato organizace už má roli s tímto názvem.",
+            "invalidPermissions": "Jedno z oprávnění je neznámé.",
+            "roleInUse": "Tuto roli mají členové: nejdřív jim dejte jinou.",
+            "notFound": "V této organizaci nenalezeno.",
+            "notMember": "Tato osoba není členem organizace.",
+            "alreadyInTeam": "Tento člen už v týmu je.",
+            "invalidTeamName": "Název týmu má 1 až 64 znaků."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "Prohlížíte tento účet jako <strong>{email}</strong>.",
       "stop": "Ukončit přihlášení za uživatele"
+    },
+    "phone": {
+      "title": "Telefonní číslo",
+      "description": "Přihlaste se kódem zaslaným SMS na toto číslo.",
+      "none": "Žádné telefonní číslo",
+      "add": "Přidat číslo",
+      "change": "Změnit",
+      "remove": "Odebrat",
+      "phoneLabel": "Telefonní číslo",
+      "phoneHint": "Mezinárodní formát, s + a předvolbou země. Pro ověření pošleme kód SMS.",
+      "send": "Poslat kód",
+      "cancel": "Zrušit",
+      "codeLabel": "Kód zaslaný na {phone}",
+      "verify": "Uložit číslo",
+      "invalidPhone": "Zadejte číslo v mezinárodním formátu, třeba +420601234567.",
+      "sendFailed": "Kód se nepodařilo odeslat. Zkuste to za pár minut.",
+      "verifyFailed": "Kód není správný nebo vypršel.",
+      "taken": "Toto číslo už používá jiný účet.",
+      "saved": "Číslo uloženo.",
+      "removeFailed": "Číslo se nepodařilo odebrat.",
+      "removed": "Číslo odebráno."
     }
   },
   "acceptInvitation": {

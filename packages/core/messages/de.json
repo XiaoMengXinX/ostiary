@@ -42,7 +42,8 @@
         "invalidEmail": "Geben Sie eine gültige E-Mail-Adresse ein.",
         "error": "Die E-Mail konnte nicht gesendet werden. Versuchen Sie es in einer Minute erneut."
       },
-      "addAccountDescription": "Bereits in diesem Browser angemeldete Konten bleiben angemeldet."
+      "addAccountDescription": "Bereits in diesem Browser angemeldete Konten bleiben angemeldet.",
+      "phoneCode": "Anmeldecode per SMS senden"
     },
     "emailCode": {
       "title": "Mit einem Code anmelden",
@@ -200,6 +201,30 @@
       "setUp": "Zwei-Faktor-Authentifizierung einrichten",
       "later": "Später erinnern",
       "continue": "Weiter"
+    },
+    "phoneCode": {
+      "title": "Per SMS anmelden",
+      "description": "Wir senden einen 6-stelligen Code per SMS an die Telefonnummer deines Kontos.",
+      "phoneLabel": "Telefonnummer",
+      "phoneHint": "Internationales Format, mit + und Ländervorwahl.",
+      "send": "Code senden",
+      "sending": "Wird gesendet…",
+      "sentTitle": "Sieh auf dein Telefon",
+      "sent": "Wenn ein Konto {phone} verwendet, ist ein 6-stelliger Code unterwegs. Er läuft in {minutes} Minuten ab.",
+      "codeLabel": "Anmeldecode",
+      "verify": "Anmelden",
+      "verifying": "Anmeldung…",
+      "newCode": "Nichts erhalten? Neuen Code senden",
+      "usePassword": "Stattdessen Passwort verwenden",
+      "errors": {
+        "invalidPhone": "Gib die Nummer im internationalen Format ein, etwa +4915112345678.",
+        "invalidCode": "Der Code stimmt nicht. Prüfe ihn und versuche es erneut.",
+        "expired": "Der Code ist abgelaufen. Fordere einen neuen an.",
+        "tooManyAttempts": "Zu viele falsche Codes. Fordere einen neuen an.",
+        "rateLimited": "Zu viele Versuche. Warte ein paar Minuten und versuche es erneut.",
+        "sendFailed": "Der Code konnte nicht gesendet werden. Versuche es in ein paar Minuten erneut.",
+        "signInFailed": "Anmeldung fehlgeschlagen. Versuche es erneut."
+      }
     }
   },
   "consent": {
@@ -531,6 +556,8 @@
             "organization_id": "ID der aktiven Organisation",
             "organization_slug": "Slug der aktiven Organisation",
             "organization_role": "Rolle in der aktiven Organisation",
+            "organization_permissions": "Berechtigungen in der aktiven Organisation",
+            "organization_teams": "Teams in der aktiven Organisation",
             "organizations": "Organisationsmitgliedschaften",
             "organization_ids": "IDs der Organisationen des Benutzers"
           }
@@ -1903,7 +1930,8 @@
             "export_data": "Kontodaten exportiert",
             "self_delete": "Eigenes Konto gelöscht",
             "export_csv": "Benutzer als CSV exportiert",
-            "import": "Benutzer importiert"
+            "import": "Benutzer importiert",
+            "remove_phone_number": "Hat die Telefonnummer entfernt"
           },
           "oauth_client": {
             "create": "OAuth-Client registriert",
@@ -1953,7 +1981,15 @@
             "invite": "Mitglied eingeladen",
             "cancel_invitation": "Einladung zurückgezogen",
             "update_member_role": "Mitgliedsrolle geändert",
-            "remove_member": "Mitglied entfernt"
+            "remove_member": "Mitglied entfernt",
+            "create_role": "Organisationsrolle erstellt",
+            "update_role": "Organisationsrolle geändert",
+            "delete_role": "Organisationsrolle gelöscht",
+            "create_team": "Team erstellt",
+            "update_team": "Team umbenannt",
+            "delete_team": "Team gelöscht",
+            "add_team_member": "Mitglied zu einem Team hinzugefügt",
+            "remove_team_member": "Mitglied aus einem Team entfernt"
           },
           "sso_provider": {
             "create": "SSO-Anbieter registriert",
@@ -2240,6 +2276,61 @@
           "lastOwner": "Eine Organisation braucht mindestens einen Inhaber. Machen Sie zuerst ein anderes Mitglied zum Inhaber.",
           "publicDelete": "Der Public-Arbeitsbereich kann nicht gelöscht werden.",
           "organizationNotFound": "Organisation nicht gefunden."
+        },
+        "rolesTeams": {
+          "rolesTitle": "Eigene Rollen",
+          "teamsTitle": "Teams",
+          "rolesDescription": "Rollen dieser Organisation zusätzlich zu Owner, Admin und Mitglied, jede mit eigenen Berechtigungen. Sie werden Mitgliedern wie die eingebauten zugewiesen, und Tokens enthalten den Rollennamen (organization.role) und die Berechtigungen (organization.permissions).",
+          "noRoles": "Keine eigene Rolle.",
+          "memberCount": "{count, plural, one {# Mitglied} other {# Mitglieder}}",
+          "noPermissions": "Keine Berechtigungen",
+          "edit": "Bearbeiten",
+          "delete": "Löschen",
+          "editRole": "{role} bearbeiten",
+          "deleteRole": "{role} löschen",
+          "addRole": "Rolle hinzufügen",
+          "deleteRoleTitle": "{role} löschen?",
+          "deleteRoleDescription": "Die Rolle verschwindet aus dieser Organisation. Sie kann erst gelöscht werden, wenn kein Mitglied sie hat.",
+          "cancel": "Abbrechen",
+          "roleDeleted": "Rolle gelöscht.",
+          "roleSaved": "Rolle gespeichert.",
+          "roleDialogDescription": "Wähle aus, was die Rolle in der Organisation darf. Owner und Admins der Organisation können Rollen auch selbst verwalten.",
+          "roleName": "Rollenname",
+          "roleNameHint": "2 bis 32 Kleinbuchstaben, Ziffern, Binde- oder Unterstriche, beginnend mit einem Buchstaben. Später nicht änderbar.",
+          "permissions": "Berechtigungen",
+          "save": "Speichern",
+          "teamsDescription": "Gruppen von Mitgliedern innerhalb der Organisation. Tokens enthalten die Teams des Mitglieds (organization.teams).",
+          "noTeams": "Kein Team.",
+          "teamCreated": "Team erstellt.",
+          "newTeam": "Neues Team",
+          "createTeam": "Team erstellen",
+          "teamRenamed": "Team umbenannt.",
+          "teamName": "Teamname",
+          "renameTeam": "{team} umbenennen",
+          "rename": "Umbenennen",
+          "deleteTeam": "{team} löschen",
+          "noTeamMembers": "Kein Mitglied in diesem Team.",
+          "removeFromTeam": "{email} aus {team} entfernen",
+          "remove": "Entfernen",
+          "teamMemberRemoved": "Mitglied aus dem Team entfernt.",
+          "teamMemberAdded": "Mitglied zum Team hinzugefügt.",
+          "addToTeam": "Mitglied zu {team} hinzufügen",
+          "memberEmail": "E-Mail des Mitglieds",
+          "add": "Hinzufügen",
+          "deleteTeamTitle": "{team} löschen?",
+          "deleteTeamDescription": "Das Team und seine Mitgliederliste werden gelöscht. Die Mitglieder bleiben in der Organisation.",
+          "teamDeleted": "Team gelöscht.",
+          "errors": {
+            "invalidName": "Ein Rollenname hat 2 bis 32 Kleinbuchstaben, Ziffern, Binde- oder Unterstriche und beginnt mit einem Buchstaben.",
+            "reservedName": "owner, admin und member sind eingebaute Rollen.",
+            "nameTaken": "Diese Organisation hat bereits eine Rolle mit diesem Namen.",
+            "invalidPermissions": "Eine der Berechtigungen ist unbekannt.",
+            "roleInUse": "Mitglieder haben diese Rolle: Gib ihnen zuerst eine andere.",
+            "notFound": "In dieser Organisation nicht gefunden.",
+            "notMember": "Diese Person ist kein Mitglied der Organisation.",
+            "alreadyInTeam": "Dieses Mitglied ist bereits im Team.",
+            "invalidTeamName": "Ein Teamname hat 1 bis 64 Zeichen."
+          }
         }
       }
     },
@@ -2683,6 +2774,27 @@
     "impersonation": {
       "viewingAs": "Sie sehen dieses Konto als <strong>{email}</strong>.",
       "stop": "Ansicht beenden"
+    },
+    "phone": {
+      "title": "Telefonnummer",
+      "description": "Melde dich mit einem per SMS an diese Nummer gesendeten Code an.",
+      "none": "Keine Telefonnummer",
+      "add": "Nummer hinzufügen",
+      "change": "Ändern",
+      "remove": "Entfernen",
+      "phoneLabel": "Telefonnummer",
+      "phoneHint": "Internationales Format, mit + und Ländervorwahl. Wir senden zur Prüfung einen Code per SMS.",
+      "send": "Code senden",
+      "cancel": "Abbrechen",
+      "codeLabel": "An {phone} gesendeter Code",
+      "verify": "Nummer speichern",
+      "invalidPhone": "Gib die Nummer im internationalen Format ein, etwa +4915112345678.",
+      "sendFailed": "Der Code konnte nicht gesendet werden. Versuche es in ein paar Minuten erneut.",
+      "verifyFailed": "Der Code stimmt nicht oder ist abgelaufen.",
+      "taken": "Ein anderes Konto verwendet diese Nummer bereits.",
+      "saved": "Nummer gespeichert.",
+      "removeFailed": "Die Nummer konnte nicht entfernt werden.",
+      "removed": "Nummer entfernt."
     }
   },
   "acceptInvitation": {

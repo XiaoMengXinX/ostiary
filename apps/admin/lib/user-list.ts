@@ -24,10 +24,15 @@ export function readUserListFilters(query: ListSearchParams): UserListFilters {
   return { search: readParam(query, "q"), role: readChoice(query, "role", ROLE_FILTERS, "all") };
 }
 
+export function userSearchWhere(search: string): SQL | undefined {
+  if (!search) return undefined;
+  const pattern = containsPattern(search);
+  return or(ilike(user.email, pattern), ilike(user.name, pattern), ilike(user.username, pattern));
+}
+
 function userListWhere({ search, role }: UserListFilters): SQL | undefined {
-  const pattern = search ? containsPattern(search) : null;
   return and(
-    pattern ? or(ilike(user.email, pattern), ilike(user.name, pattern), ilike(user.username, pattern)) : undefined,
+    userSearchWhere(search),
     role === "admin" ? userHasRoleSql("admin") : role === "user" ? not(userHasRoleSql("admin")) : undefined,
   );
 }

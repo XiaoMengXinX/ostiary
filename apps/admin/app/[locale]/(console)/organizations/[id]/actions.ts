@@ -1,7 +1,8 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
-import { and, count, eq, inArray, ne } from "drizzle-orm";
+import { isAPIError } from "better-auth/api";
+import { and, asc, count, eq, inArray, ne, notExists } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { setOrganizationTwoFactor } from "@ostiary/core/lib/two-factor-policy";
@@ -23,18 +24,20 @@ import { invitation, member, organization, team, teamMember, user } from "@ostia
 import { leavesNoOwner, roleIncludesOwner } from "@ostiary/core/lib/admin/organization-owners";
 import { queueOrganizationInviteEmail } from "@ostiary/core/lib/email/queue-organization-invite-email";
 import { env } from "@ostiary/core/lib/env";
+import type { BUILT_IN_ORGANIZATION_ROLES } from "@ostiary/core/lib/organization-access";
 import { PUBLIC_ORGANIZATION_ID } from "@ostiary/core/lib/organization-public";
 import { routing } from "@ostiary/core/i18n/routing";
 import { makeEvent, memberSnapshot } from "@ostiary/core/lib/webhooks/events";
 import { enqueueWebhookEvents } from "@ostiary/core/lib/webhooks/outbox";
 import { adminAction, input } from "@/lib/admin-action";
 import type { ActionResult } from "@/lib/action-result";
+import { auth } from "@/lib/auth";
+import { userSearchWhere } from "@/lib/user-list";
 
 /*
  * Platform admins usually aren't members of the organizations they manage, and Better Auth's
- * organization endpoints only allow members with the right role. These actions write to the
- * shared database directly, after checking for an admin session, and record each change.
- * Writing past Better Auth's adapter, they also send the membership webhook events themselves.
+ * organization endpoints generally require membership with the right role. Actions that write
+ * past Better Auth's adapter also record the membership webhook events themselves.
  */
 
 /** Built-in roles, and the organization's own (organization_role), checked per organization. */
@@ -92,6 +95,63 @@ export async function renameOrganization(id: string, name: string, slug: string)
 }
 
 const memberRoleInput = z.tuple([input.id, input.id, role]);
+
+type CandidateUser = { id: string; name: string; email: string };
+
+export async function searchMembershipCandidates(orgId: string, search: string): Promise<ActionResult<{ users: CandidateUser[] }>> {
+  return adminAction(z.tuple([input.id, input.text]), [orgId, search], async ([orgId, search]) => {
+    if (orgId === PUBLIC_ORGANIZATION_ID) return { ok: false, error: (await errors())("publicMembers") };
+    const membership = db
+      .select({ id: member.id })
+      .from(member)
+      .where(and(eq(member.organizationId, orgId), eq(member.userId, user.id)));
+    const users = await db
+      .select({ id: user.id, name: user.name, email: user.email })
+      .from(user)
+      .where(and(notExists(membership), userSearchWhere(search.trim())))
+      .orderBy(asc(user.name), asc(user.email))
+      .limit(20);
+    return { ok: true, users };
+  });
+}
+
+export async function addExistingMember(orgId: string, userId: string, memberRole: Role): Promise<ActionResult> {
+  return adminAction(memberRoleInput, [orgId, userId, memberRole], async ([orgId, userId, memberRole], { audit }) => {
+    if (orgId === PUBLIC_ORGANIZATION_ID) return { ok: false, error: (await errors())("publicMembers") };
+    const [name, roles] = await Promise.all([orgName(orgId), organizationRoleNames(orgId)]);
+    if (name === null) return { ok: false, error: (await errors())("organizationNotFound") };
+    if (!roles.includes(memberRole)) return { ok: false, error: (await errors())("unknownRole") };
+
+    try {
+      await auth.api.addMember({
+        body: {
+          organizationId: orgId,
+          userId,
+          // The endpoint accepts custom role names, although its type only lists built-in ones.
+          role: memberRole as (typeof BUILT_IN_ORGANIZATION_ROLES)[number],
+        },
+      });
+    } catch (error) {
+      if (isAPIError(error)) {
+        const t = await errors();
+        switch (error.body?.code) {
+          case "USER_IS_ALREADY_A_MEMBER_OF_THIS_ORGANIZATION":
+            return { ok: false, error: t("alreadyMember") };
+          case "USER_NOT_FOUND":
+            return { ok: false, error: t("userNotFound") };
+          case "ORGANIZATION_NOT_FOUND":
+            return { ok: false, error: t("organizationNotFound") };
+          case "ORGANIZATION_MEMBERSHIP_LIMIT_REACHED":
+            return { ok: false, error: t("membershipLimitReached") };
+        }
+      }
+      throw error;
+    }
+
+    await audit({ action: "organization.add_member", target: { type: "organization", id: orgId, label: name }, metadata: { userId, role: memberRole } });
+    return { ok: true };
+  });
+}
 
 /** Changes a member's role. The organization keeps at least one owner. */
 export async function updateMemberRole(orgId: string, memberId: string, newRole: Role): Promise<ActionResult> {

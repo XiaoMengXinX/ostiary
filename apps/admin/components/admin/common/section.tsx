@@ -1,5 +1,6 @@
 import {
   Card,
+  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -11,12 +12,14 @@ export function Section({
   id,
   title,
   description,
+  action,
   contentClassName,
   children,
 }: {
   id?: string;
   title: string;
   description?: React.ReactNode;
+  action?: React.ReactNode;
   contentClassName?: string;
   children: React.ReactNode;
 }) {
@@ -25,6 +28,7 @@ export function Section({
       <CardHeader>
         <CardTitle className="text-base">{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
+        {action ? <CardAction>{action}</CardAction> : null}
       </CardHeader>
       <CardContent className={contentClassName}>{children}</CardContent>
     </Card>

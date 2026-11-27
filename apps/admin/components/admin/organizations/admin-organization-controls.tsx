@@ -1,10 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { Trash2 } from "lucide-react";
+import { Trash2, UserPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@ostiary/core/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@ostiary/core/components/ui/dialog";
 import { Field, FieldGroup, FieldLabel } from "@ostiary/core/components/ui/field";
 import { Input } from "@ostiary/core/components/ui/input";
 import {
@@ -15,14 +16,18 @@ import {
   SelectValue,
 } from "@ostiary/core/components/ui/select";
 import {
+  addExistingMember,
   cancelInvitation,
   inviteMember,
   removeMember,
   renameOrganization,
+  searchMembershipCandidates,
   updateMemberRole,
 } from "@/app/[locale]/(console)/organizations/[id]/actions";
 import { ConfirmRemoveDialog } from "@/components/admin/common/confirm-remove-dialog";
+import { DialogActions } from "@/components/admin/common/dialog-actions";
 import { useAdminAction } from "@/components/admin/common/use-admin-action";
+import { useDebouncedValue } from "@/components/admin/common/use-debounced-value";
 
 /** A built-in role (translated) or one of the organization's own (shown by its name). */
 type Role = string;
@@ -61,15 +66,20 @@ export function RenameOrganizationForm({ id, name, slug }: { id: string; name: s
   );
 }
 
-function roleOptions(customRoles: readonly string[], current?: string): string[] {
+function OrganizationRoleOptions({ customRoles, current }: { customRoles: readonly string[]; current?: string }) {
+  const t = useTranslations("admin.pages.organizations.controls.roles");
   const all = [...ROLES, ...customRoles];
-  return current && !all.includes(current) ? [...all, current] : all;
+  const roles = current && !all.includes(current) ? [...all, current] : all;
+  return roles.map((role) => (
+    <SelectItem key={role} value={role}>
+      {(ROLES as readonly string[]).includes(role) ? t(role) : role}
+    </SelectItem>
+  ));
 }
 
 export function MemberRoleSelect({ orgId, memberId, role, customRoles = [] }: { orgId: string; memberId: string; role: string; customRoles?: string[] }) {
   const t = useTranslations("admin.pages.organizations.controls");
   const { busy, run } = useAdminAction();
-  const label = (r: string) => ((ROLES as readonly string[]).includes(r) ? t(`roles.${r}`) : r);
   return (
     <Select
       value={role}
@@ -80,13 +90,118 @@ export function MemberRoleSelect({ orgId, memberId, role, customRoles = [] }: { 
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        {roleOptions(customRoles, role).map((r) => (
-          <SelectItem key={r} value={r}>
-            {label(r)}
-          </SelectItem>
-        ))}
+        <OrganizationRoleOptions customRoles={customRoles} current={role} />
       </SelectContent>
     </Select>
+  );
+}
+
+export function AddExistingMemberDialog({ orgId, customRoles }: { orgId: string; customRoles: string[] }) {
+  const t = useTranslations("admin.pages.organizations.controls");
+  const tc = useTranslations("admin.common");
+  const tu = useTranslations("admin.pages.users.list");
+  const te = useTranslations("admin.pages.organizations.errors");
+  const searchId = React.useId();
+  const roleId = React.useId();
+  const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+  const [userId, setUserId] = React.useState("");
+  const [role, setRole] = React.useState("member");
+  const [result, setResult] = React.useState<{ query: string; response: Awaited<ReturnType<typeof searchMembershipCandidates>> | null }>();
+  const { busy, run } = useAdminAction();
+  const term = search.trim();
+  const query = useDebouncedValue(term, 300);
+  const current = query === term && result?.query === query ? result : undefined;
+
+  React.useEffect(() => {
+    if (!open) return;
+    let active = true;
+    void searchMembershipCandidates(orgId, query).then(
+      (response) => { if (active) setResult({ query, response }); },
+      () => { if (active) setResult({ query, response: null }); },
+    );
+    return () => { active = false; };
+  }, [open, orgId, query]);
+
+  function changeOpen(next: boolean) {
+    setOpen(next);
+    if (!next) {
+      setSearch("");
+      setUserId("");
+      setRole("member");
+      setResult(undefined);
+    }
+  }
+
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!userId || busy) return;
+    if (await run(() => addExistingMember(orgId, userId, role), t("memberAdded"))) changeOpen(false);
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(next) => { if (!busy) changeOpen(next); }}>
+      <DialogTrigger asChild>
+        <Button type="button" variant="outline" size="sm">
+          <UserPlus aria-hidden />
+          {t("addExistingUser")}
+        </Button>
+      </DialogTrigger>
+      <DialogContent aria-describedby={undefined} className="max-h-[calc(100dvh-2rem)] overflow-y-auto">
+        <form className="space-y-4" onSubmit={submit}>
+          <DialogHeader>
+            <DialogTitle>{t("addExistingUser")}</DialogTitle>
+          </DialogHeader>
+          <Field>
+            <FieldLabel htmlFor={searchId}>{tu("searchLabel")}</FieldLabel>
+            <Input
+              id={searchId}
+              type="search"
+              value={search}
+              onChange={(event) => {
+                setSearch(event.target.value);
+                setUserId("");
+              }}
+              placeholder={tu("searchPlaceholder")}
+              maxLength={1000}
+              autoComplete="off"
+              disabled={busy}
+            />
+            {!current ? (
+              <p className="text-sm text-muted-foreground" role="status">{tc("loading")}</p>
+            ) : !current.response?.ok ? (
+              <p className="text-sm text-destructive" role="alert">{current.response?.error ?? te("requestFailed")}</p>
+            ) : current.response.users.length === 0 ? (
+              <p className="text-sm text-muted-foreground" role="status">{tu("empty")}</p>
+            ) : (
+              <fieldset aria-label={tu("columns.user")} disabled={busy} className="max-h-52 min-w-0 divide-y overflow-y-auto rounded-md border">
+                {current.response.users.map((candidate) => (
+                  <label key={candidate.id} className="flex cursor-pointer items-center gap-3 px-3 py-2 hover:bg-muted/50 has-checked:bg-muted">
+                    <input type="radio" name={searchId} value={candidate.id} checked={userId === candidate.id} onChange={() => setUserId(candidate.id)} />
+                    <span className="min-w-0 break-words text-sm">
+                      <span className="block font-medium">{candidate.name || candidate.email}</span>
+                      {candidate.name ? <span className="block text-muted-foreground">{candidate.email}</span> : null}
+                    </span>
+                  </label>
+                ))}
+              </fieldset>
+            )}
+          </Field>
+          <Field>
+            <FieldLabel htmlFor={roleId}>{t("role")}</FieldLabel>
+            <Select value={role} onValueChange={setRole} disabled={busy}>
+              <SelectTrigger id={roleId} className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <OrganizationRoleOptions customRoles={customRoles} />
+              </SelectContent>
+            </Select>
+          </Field>
+          <DialogActions busy={busy} onCancel={() => changeOpen(false)} confirmLabel={t("addExistingUser")} confirmDisabled={!userId} />
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
 
@@ -163,7 +278,6 @@ export function CancelInvitationButton({ orgId, invitationId, email }: { orgId: 
 
 export function InviteMemberForm({ orgId, customRoles = [] }: { orgId: string; customRoles?: string[] }) {
   const t = useTranslations("admin.pages.organizations.controls");
-  const label = (r: string) => ((ROLES as readonly string[]).includes(r) ? t(`roles.${r}`) : r);
   const [email, setEmail] = React.useState("");
   const [role, setRole] = React.useState<Role>("member");
   const { busy, run } = useAdminAction();
@@ -184,11 +298,7 @@ export function InviteMemberForm({ orgId, customRoles = [] }: { orgId: string; c
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          {roleOptions(customRoles).map((r) => (
-            <SelectItem key={r} value={r}>
-              {label(r)}
-            </SelectItem>
-          ))}
+          <OrganizationRoleOptions customRoles={customRoles} />
         </SelectContent>
       </Select>
       <Button type="submit" loading={busy} disabled={!email.trim()}>

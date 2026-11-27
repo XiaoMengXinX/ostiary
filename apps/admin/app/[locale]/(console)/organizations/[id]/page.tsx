@@ -7,6 +7,7 @@ import { readPagination, type ListSearchParams } from "@/components/admin/common
 import { formatDateTime, PageHeader } from "@/components/admin/common/page-header";
 import { Section, SectionEmpty } from "@/components/admin/common/section";
 import {
+  AddExistingMemberDialog,
   CancelInvitationButton,
   InviteMemberForm,
   MemberRoleSelect,
@@ -172,6 +173,7 @@ export default async function AdminOrganizationPage({
           )}
           <Section
             title={t("members")}
+            action={isPublic ? undefined : <AddExistingMemberDialog orgId={id} customRoles={customRoleNames} />}
             contentClassName="space-y-6"
             description={
               isPublic

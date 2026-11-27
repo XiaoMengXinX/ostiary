@@ -305,6 +305,22 @@
       "signingKeys": "Podpisové klíče"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Vytvořit aplikaci",
+        "proxyHint": "Použijte název hostitele s aktivní proxy Cloudflare. Prázdná cesta chrání celý hostitel.",
+        "hostname": "Název hostitele",
+        "path": "Cesta",
+        "organization": "Organizace",
+        "saved": "Aplikace Cloudflare Access byla uložena.",
+        "empty": "Zásady organizací Ostiary zatím žádná aplikace nepoužívá.",
+        "notConfigured": "Nastavte pro projekt správy účet Cloudflare Access, poskytovatele identity a token API.",
+        "organizationRequired": "Vyberte existující organizaci.",
+        "invalidTarget": "Zadejte platný název hostitele a volitelně absolutní cestu. Hostitelé Ostiary jsou vyhrazeni.",
+        "targetConflict": "Hostitel a cesta se překrývají se stávající aplikací Access.",
+        "policyConflict": "Zásada se stejným názvem už existuje, ale má jiná pravidla.",
+        "unsupportedApp": "Tuto aplikaci již nespravují zásady organizace Ostiary.",
+        "unavailable": "Cloudflare Access není dostupný. Zkontrolujte připojení a zkuste to znovu."
+      },
       "overview": {
         "title": "Přehled",
         "activity": {

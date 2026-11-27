@@ -305,6 +305,22 @@
       "signingKeys": "Ondertekeningssleutels"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Applicatie maken",
+        "proxyHint": "Gebruik een hostnaam waarvoor de Cloudflare-proxy actief is. Laat het pad leeg om de hele host te beveiligen.",
+        "hostname": "Hostnaam",
+        "path": "Pad",
+        "organization": "Organisatie",
+        "saved": "Cloudflare Access-applicatie opgeslagen.",
+        "empty": "Er zijn nog geen applicaties met organisatiebeleid van Ostiary.",
+        "notConfigured": "Configureer het Cloudflare Access-account, de identiteitsprovider en het API-token voor het beheerproject.",
+        "organizationRequired": "Selecteer een bestaande organisatie.",
+        "invalidTarget": "Voer een geldige hostnaam en eventueel een absoluut pad in. De hostnamen van Ostiary zijn gereserveerd.",
+        "targetConflict": "De hostnaam en het pad overlappen een bestaande Access-applicatie.",
+        "policyConflict": "Er bestaat al beleid met dezelfde naam maar andere regels.",
+        "unsupportedApp": "Deze applicatie wordt niet langer beheerd door organisatiebeleid van Ostiary.",
+        "unavailable": "Cloudflare Access is niet beschikbaar. Controleer de verbinding en probeer het opnieuw."
+      },
       "overview": {
         "title": "Overzicht",
         "activity": {

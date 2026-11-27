@@ -305,6 +305,22 @@
       "signingKeys": "Signeringsnøkler"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Opprett applikasjon",
+        "proxyHint": "Bruk et vertsnavn med aktiv Cloudflare-proxy. La banen stå tom for å beskytte hele verten.",
+        "hostname": "Vertsnavn",
+        "path": "Bane",
+        "organization": "Organisasjon",
+        "saved": "Cloudflare Access-applikasjonen er lagret.",
+        "empty": "Ingen applikasjoner bruker ennå Ostiarys organisasjonsregler.",
+        "notConfigured": "Konfigurer Cloudflare Access-kontoen, identitetsleverandøren og API-tokenet for administrasjonsprosjektet.",
+        "organizationRequired": "Velg en eksisterende organisasjon.",
+        "invalidTarget": "Oppgi et gyldig vertsnavn og eventuelt en absolutt bane. Ostiarys egne vertsnavn er reservert.",
+        "targetConflict": "Vertsnavnet og banen overlapper en eksisterende Access-applikasjon.",
+        "policyConflict": "Det finnes allerede en policy med samme navn og andre regler.",
+        "unsupportedApp": "Applikasjonen styres ikke lenger av en organisasjonspolicy i Ostiary.",
+        "unavailable": "Cloudflare Access er utilgjengelig. Kontroller tilkoblingen og prøv igjen."
+      },
       "overview": {
         "title": "Oversikt",
         "activity": {

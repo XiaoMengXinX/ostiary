@@ -305,6 +305,22 @@
       "signingKeys": "Signeringsnycklar"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Skapa applikation",
+        "proxyHint": "Använd ett värdnamn med aktiv Cloudflare-proxy. Lämna sökvägen tom för att skydda hela värden.",
+        "hostname": "Värdnamn",
+        "path": "Sökväg",
+        "organization": "Organisation",
+        "saved": "Cloudflare Access-applikationen har sparats.",
+        "empty": "Inga applikationer använder Ostiarys organisationspolicyer ännu.",
+        "notConfigured": "Konfigurera Cloudflare Access-kontot, identitetsleverantören och API-token för administratörsprojektet.",
+        "organizationRequired": "Välj en befintlig organisation.",
+        "invalidTarget": "Ange ett giltigt värdnamn och eventuellt en absolut sökväg. Ostiarys värdnamn är reserverade.",
+        "targetConflict": "Värdnamnet och sökvägen överlappar en befintlig Access-applikation.",
+        "policyConflict": "Det finns redan en policy med samma namn och andra regler.",
+        "unsupportedApp": "Applikationen hanteras inte längre av en organisationspolicy i Ostiary.",
+        "unavailable": "Cloudflare Access är inte tillgängligt. Kontrollera anslutningen och försök igen."
+      },
       "overview": {
         "title": "Översikt",
         "activity": {

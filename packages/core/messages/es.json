@@ -305,6 +305,22 @@
       "signingKeys": "Claves de firma"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Crear aplicación",
+        "proxyHint": "Usa un nombre de host que ya pase por el proxy de Cloudflare. Deja la ruta vacía para proteger todo el host.",
+        "hostname": "Nombre de host",
+        "path": "Ruta",
+        "organization": "Organización",
+        "saved": "Se ha guardado la aplicación de Cloudflare Access.",
+        "empty": "Ninguna aplicación usa aún políticas de organización de Ostiary.",
+        "notConfigured": "Configura la cuenta de Cloudflare Access, el proveedor de identidad y el token de API para el proyecto de administración.",
+        "organizationRequired": "Selecciona una organización existente.",
+        "invalidTarget": "Introduce un nombre de host válido y, opcionalmente, una ruta absoluta. Los nombres de host de Ostiary están reservados.",
+        "targetConflict": "El host y la ruta se solapan con una aplicación de Access existente.",
+        "policyConflict": "Ya existe una política con el mismo nombre y reglas diferentes.",
+        "unsupportedApp": "Esta aplicación ya no está gestionada por una política de organización de Ostiary.",
+        "unavailable": "Cloudflare Access no está disponible. Comprueba la conexión y vuelve a intentarlo."
+      },
       "overview": {
         "title": "Resumen",
         "activity": {

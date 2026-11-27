@@ -72,7 +72,7 @@ export function AdminHeader() {
   const pathname = usePathname();
   const t = useTranslations("admin");
   const key = headerTitleKey(pathname);
-  const title = t(`header.${key}`);
+  const title = pathname === "/cloudflare-access" ? "Cloudflare Access" : t(`header.${key}`);
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">

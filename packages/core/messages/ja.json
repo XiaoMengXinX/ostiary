@@ -305,6 +305,22 @@
       "signingKeys": "署名鍵"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "アプリケーションを作成",
+        "proxyHint": "Cloudflare プロキシが有効なホスト名を使用してください。パスを空欄にするとホスト名全体を保護します。",
+        "hostname": "ホスト名",
+        "path": "パス",
+        "organization": "組織",
+        "saved": "Cloudflare Access アプリケーションを保存しました。",
+        "empty": "Ostiary の組織ポリシーを使用するアプリケーションはまだありません。",
+        "notConfigured": "管理プロジェクトに Cloudflare Access のアカウント、ID プロバイダー、API トークンを設定してください。",
+        "organizationRequired": "既存の組織を選択してください。",
+        "invalidTarget": "有効なホスト名を入力してください。パスを指定する場合は絶対パスを使用してください。Ostiary 自体のホスト名は予約済みです。",
+        "targetConflict": "このホスト名とパスは既存の Access アプリケーションの範囲と重複しています。",
+        "policyConflict": "ルールが異なる同名のポリシーが存在します。",
+        "unsupportedApp": "このアプリケーションは Ostiary の組織ポリシーで管理されていません。",
+        "unavailable": "Cloudflare Access に接続できません。接続を確認して再試行してください。"
+      },
       "overview": {
         "title": "概要",
         "activity": {

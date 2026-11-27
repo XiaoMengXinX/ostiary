@@ -305,6 +305,22 @@
       "signingKeys": "Signaturschlüssel"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Anwendung erstellen",
+        "proxyHint": "Verwenden Sie einen Hostnamen mit aktiviertem Cloudflare-Proxy. Ein leerer Pfad schützt den gesamten Host.",
+        "hostname": "Hostname",
+        "path": "Pfad",
+        "organization": "Organisation",
+        "saved": "Cloudflare-Access-Anwendung gespeichert.",
+        "empty": "Es gibt noch keine Anwendungen mit Ostiary-Organisationsrichtlinien.",
+        "notConfigured": "Konfigurieren Sie das Cloudflare-Access-Konto, den Identitätsanbieter und das API-Token für das Admin-Projekt.",
+        "organizationRequired": "Wählen Sie eine vorhandene Organisation.",
+        "invalidTarget": "Geben Sie einen gültigen Hostnamen und optional einen absoluten Pfad an. Die Ostiary-Hostnamen sind reserviert.",
+        "targetConflict": "Hostname und Pfad überschneiden sich mit einer vorhandenen Access-Anwendung.",
+        "policyConflict": "Es gibt bereits eine gleichnamige Richtlinie mit anderen Regeln.",
+        "unsupportedApp": "Diese Anwendung wird nicht mehr durch eine Ostiary-Organisationsrichtlinie verwaltet.",
+        "unavailable": "Cloudflare Access ist nicht verfügbar. Überprüfen Sie die Verbindung und versuchen Sie es erneut."
+      },
       "overview": {
         "title": "Übersicht",
         "activity": {

@@ -305,6 +305,22 @@
       "signingKeys": "签名密钥"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "创建应用",
+        "proxyHint": "使用已开启 Cloudflare 代理的域名。路径留空时保护整个域名。",
+        "hostname": "域名",
+        "path": "路径",
+        "organization": "组织",
+        "saved": "Cloudflare Access 应用已保存。",
+        "empty": "暂无使用 Ostiary 组织策略的应用。",
+        "notConfigured": "请为管理后台配置 Cloudflare Access 账号、身份提供商和 API token。",
+        "organizationRequired": "请选择一个现有组织。",
+        "invalidTarget": "请输入有效域名和可选的绝对路径。Ostiary 自身的域名为保留域名。",
+        "targetConflict": "该域名和路径与现有 Access 应用的范围重叠。",
+        "policyConflict": "Cloudflare 已有同名策略，规则不同。",
+        "unsupportedApp": "此应用已脱离 Ostiary 组织策略管理。",
+        "unavailable": "暂时无法访问 Cloudflare Access。请检查连接后重试。"
+      },
       "overview": {
         "title": "概览",
         "activity": {

@@ -305,6 +305,22 @@
       "signingKeys": "Allekirjoitusavaimet"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Luo sovellus",
+        "proxyHint": "Käytä Cloudflaren välittämää isäntänimeä. Tyhjä polku suojaa koko isännän.",
+        "hostname": "Isäntänimi",
+        "path": "Polku",
+        "organization": "Organisaatio",
+        "saved": "Cloudflare Access -sovellus tallennettu.",
+        "empty": "Yksikään sovellus ei vielä käytä Ostiaryn organisaatiokäytäntöjä.",
+        "notConfigured": "Määritä hallintaprojektille Cloudflare Access -tili, tunnistetietojen tarjoaja ja API-tunnus.",
+        "organizationRequired": "Valitse olemassa oleva organisaatio.",
+        "invalidTarget": "Anna kelvollinen isäntänimi ja halutessasi absoluuttinen polku. Ostiaryn omat isäntänimet on varattu.",
+        "targetConflict": "Isäntänimi ja polku ovat päällekkäisiä nykyisen Access-sovelluksen kanssa.",
+        "policyConflict": "Samanniminen käytäntö on jo olemassa eri säännöillä.",
+        "unsupportedApp": "Sovellusta ei enää hallita Ostiaryn organisaatiokäytännöllä.",
+        "unavailable": "Cloudflare Access ei ole käytettävissä. Tarkista yhteys ja yritä uudelleen."
+      },
       "overview": {
         "title": "Yleiskatsaus",
         "activity": {

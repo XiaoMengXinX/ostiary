@@ -305,6 +305,22 @@
       "signingKeys": "مفاتيح التوقيع"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "إنشاء تطبيق",
+        "proxyHint": "استخدم اسم مضيف يعمل عبر وكيل Cloudflare. اترك المسار فارغًا لحماية المضيف بالكامل.",
+        "hostname": "اسم المضيف",
+        "path": "المسار",
+        "organization": "المؤسسة",
+        "saved": "تم حفظ تطبيق Cloudflare Access.",
+        "empty": "لا توجد تطبيقات تستخدم سياسات مؤسسات Ostiary بعد.",
+        "notConfigured": "اضبط حساب Cloudflare Access وموفر الهوية ورمز API لمشروع الإدارة.",
+        "organizationRequired": "حدد مؤسسة موجودة.",
+        "invalidTarget": "أدخل اسم مضيف صالحًا ومسارًا مطلقًا اختياريًا. أسماء مضيفي Ostiary محجوزة.",
+        "targetConflict": "يتداخل اسم المضيف والمسار مع تطبيق Access موجود.",
+        "policyConflict": "توجد سياسة بالاسم نفسه وبقواعد مختلفة.",
+        "unsupportedApp": "لم يعد التطبيق خاضعًا لسياسة مؤسسة Ostiary.",
+        "unavailable": "يتعذر الوصول إلى Cloudflare Access. تحقق من الاتصال وأعد المحاولة."
+      },
       "overview": {
         "title": "نظرة عامة",
         "activity": {

@@ -305,6 +305,22 @@
       "signingKeys": "İmzalama anahtarları"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Uygulama oluştur",
+        "proxyHint": "Cloudflare proxy’si etkin bir ana bilgisayar adı kullanın. Ana bilgisayarın tamamını korumak için yolu boş bırakın.",
+        "hostname": "Ana bilgisayar adı",
+        "path": "Yol",
+        "organization": "Kuruluş",
+        "saved": "Cloudflare Access uygulaması kaydedildi.",
+        "empty": "Henüz hiçbir uygulama Ostiary kuruluş politikalarını kullanmıyor.",
+        "notConfigured": "Yönetim projesi için Cloudflare Access hesabını, kimlik sağlayıcısını ve API belirtecini yapılandırın.",
+        "organizationRequired": "Mevcut bir kuruluş seçin.",
+        "invalidTarget": "Geçerli bir ana bilgisayar adı ve isteğe bağlı mutlak yol girin. Ostiary’nin ana bilgisayar adları ayrılmıştır.",
+        "targetConflict": "Ana bilgisayar adı ve yol mevcut bir Access uygulamasıyla çakışıyor.",
+        "policyConflict": "Aynı ada sahip ve kuralları farklı bir politika zaten var.",
+        "unsupportedApp": "Bu uygulama artık bir Ostiary kuruluş politikasıyla yönetilmiyor.",
+        "unavailable": "Cloudflare Access kullanılamıyor. Bağlantıyı kontrol edip tekrar deneyin."
+      },
       "overview": {
         "title": "Genel bakış",
         "activity": {

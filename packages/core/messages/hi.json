@@ -305,6 +305,22 @@
       "signingKeys": "साइनिंग कुंजियाँ"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "ऐप्लिकेशन बनाएँ",
+        "proxyHint": "ऐसा होस्टनाम इस्तेमाल करें जो पहले से Cloudflare प्रॉक्सी से जुड़ा है। पूरे होस्ट की सुरक्षा के लिए पथ खाली छोड़ें।",
+        "hostname": "होस्टनाम",
+        "path": "पथ",
+        "organization": "संगठन",
+        "saved": "Cloudflare Access ऐप्लिकेशन सेव हो गया।",
+        "empty": "अभी कोई ऐप्लिकेशन Ostiary की संगठन नीतियाँ इस्तेमाल नहीं करता।",
+        "notConfigured": "इस एडमिन प्रोजेक्ट के लिए Cloudflare Access खाता, पहचान प्रदाता और API टोकन कॉन्फ़िगर करें।",
+        "organizationRequired": "कोई मौजूदा संगठन चुनें।",
+        "invalidTarget": "मान्य होस्टनाम और वैकल्पिक ऐब्सलूट पथ डालें। Ostiary के अपने होस्टनाम आरक्षित हैं।",
+        "targetConflict": "यह होस्टनाम और पथ किसी मौजूदा Access ऐप्लिकेशन से ओवरलैप करते हैं।",
+        "policyConflict": "इस नाम की एक नीति पहले से है और उसके नियम अलग हैं।",
+        "unsupportedApp": "यह ऐप्लिकेशन अब किसी Ostiary संगठन नीति के तहत प्रबंधित नहीं है।",
+        "unavailable": "Cloudflare Access उपलब्ध नहीं है। कनेक्शन की जाँच करके फिर से कोशिश करें।"
+      },
       "overview": {
         "title": "अवलोकन",
         "activity": {

@@ -4,6 +4,7 @@ import {
   Activity,
   Boxes,
   Building2,
+  Cloud,
   FileKey,
   History,
   IdCard,
@@ -52,6 +53,7 @@ export function useAdminNavSections(): AdminNavSection[] {
       label: t("groupDevelopers"),
       items: [
         { title: t("applications"), url: "/applications", icon: <Boxes /> },
+        { title: "Cloudflare Access", url: "/cloudflare-access", icon: <Cloud /> },
         { title: t("apis"), url: "/apis", icon: <Network /> },
         { title: t("apiKeys"), url: "/api-keys", icon: <KeySquare /> },
         { title: t("consent"), url: "/consent", icon: <ScrollText /> },

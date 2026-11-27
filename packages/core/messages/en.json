@@ -305,6 +305,22 @@
       "signingKeys": "Signing keys"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "Create application",
+        "proxyHint": "Use a hostname already proxied by Cloudflare. Leave the path blank to protect the whole hostname.",
+        "hostname": "Hostname",
+        "path": "Path",
+        "organization": "Organization",
+        "saved": "Cloudflare Access application saved.",
+        "empty": "No applications use Ostiary organization policies yet.",
+        "notConfigured": "Configure the Cloudflare Access account, identity provider and API token for this admin project.",
+        "organizationRequired": "Select an existing organization.",
+        "invalidTarget": "Enter a valid hostname and an optional absolute path. Ostiary’s own hostnames are reserved.",
+        "targetConflict": "This hostname and path overlap an existing Access application.",
+        "policyConflict": "A policy with the same name already exists with different rules.",
+        "unsupportedApp": "This application is no longer managed by an Ostiary organization policy.",
+        "unavailable": "Cloudflare Access is unavailable. Check the connection and try again."
+      },
       "overview": {
         "title": "Overview",
         "activity": {

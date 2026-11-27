@@ -305,6 +305,22 @@
       "signingKeys": "서명 키"
     },
     "pages": {
+      "cloudflareAccess": {
+        "create": "애플리케이션 만들기",
+        "proxyHint": "이미 Cloudflare 프록시가 활성화된 호스트 이름을 사용하세요. 전체 호스트를 보호하려면 경로를 비워 두세요.",
+        "hostname": "호스트 이름",
+        "path": "경로",
+        "organization": "조직",
+        "saved": "Cloudflare Access 애플리케이션을 저장했습니다.",
+        "empty": "Ostiary 조직 정책을 사용하는 애플리케이션이 아직 없습니다.",
+        "notConfigured": "관리 프로젝트에 Cloudflare Access 계정, ID 공급자, API 토큰을 설정하세요.",
+        "organizationRequired": "기존 조직을 선택하세요.",
+        "invalidTarget": "유효한 호스트 이름을 입력하세요. 경로를 지정할 경우 절대 경로를 사용하세요. Ostiary 자체 호스트 이름은 예약되어 있습니다.",
+        "targetConflict": "이 호스트 이름과 경로가 기존 Access 애플리케이션과 겹칩니다.",
+        "policyConflict": "이름이 같고 규칙이 다른 정책이 이미 있습니다.",
+        "unsupportedApp": "이 애플리케이션은 더 이상 Ostiary 조직 정책으로 관리되지 않습니다.",
+        "unavailable": "Cloudflare Access를 사용할 수 없습니다. 연결을 확인하고 다시 시도하세요."
+      },
       "overview": {
         "title": "개요",
         "activity": {
